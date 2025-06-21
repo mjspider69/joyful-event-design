@@ -14,7 +14,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-bold text-2xl text-pink-500">
             <Heart className="h-8 w-8" />
-            WedPlanner
+            Aaroham
           </Link>
 
           {/* Desktop Navigation */}
