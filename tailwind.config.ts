@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,7 +19,38 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'playfair': ['Playfair Display', 'serif'],
+				'cinzel': ['Cinzel', 'serif'],
+				'cormorant': ['Cormorant Garamond', 'serif'],
+			},
 			colors: {
+				maroon: {
+					50: '#fdf2f3',
+					100: '#fce7e9',
+					200: '#f9d2d7',
+					300: '#f4adb7',
+					400: '#ec7d8f',
+					500: '#e0526d',
+					600: '#cc2f53',
+					700: '#ac2345',
+					800: '#8b1f3e',
+					900: '#722f37',
+					950: '#3f1419',
+				},
+				gold: {
+					50: '#fefce8',
+					100: '#fef9c3',
+					200: '#fef08a',
+					300: '#fde047',
+					400: '#facc15',
+					500: '#eab308',
+					600: '#ca8a04',
+					700: '#a16207',
+					800: '#854d0e',
+					900: '#713f12',
+					950: '#422006',
+				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',

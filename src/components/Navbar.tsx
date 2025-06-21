@@ -8,50 +8,50 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-maroon-900/95 backdrop-blur-sm border-b border-gold-400">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 font-bold text-2xl text-pink-500">
+          <Link to="/" className="flex items-center gap-2 font-cinzel font-bold text-3xl text-gold-400">
             <Heart className="h-8 w-8" />
             Aaroham
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className="hover:text-pink-500 transition-colors">
+          <div className="hidden md:flex items-center gap-8 font-cormorant text-lg">
+            <Link to="/" className="text-gold-300 hover:text-gold-400 transition-colors">
               Home
             </Link>
-            <Link to="/services" className="hover:text-pink-500 transition-colors">
+            <Link to="/services" className="text-gold-300 hover:text-gold-400 transition-colors">
               Services
             </Link>
-            <Link to="/vendors" className="hover:text-pink-500 transition-colors">
+            <Link to="/vendors" className="text-gold-300 hover:text-gold-400 transition-colors">
               Vendors
             </Link>
-            <Link to="/gallery" className="hover:text-pink-500 transition-colors">
+            <Link to="/gallery" className="text-gold-300 hover:text-gold-400 transition-colors">
               Gallery
             </Link>
-            <Link to="/blog" className="hover:text-pink-500 transition-colors">
+            <Link to="/blog" className="text-gold-300 hover:text-gold-400 transition-colors">
               Blog
             </Link>
-            <Link to="/contact" className="hover:text-pink-500 transition-colors">
+            <Link to="/contact" className="text-gold-300 hover:text-gold-400 transition-colors">
               Contact
             </Link>
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="outline">
+            <Button variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant">
               Sign In
             </Button>
-            <Button className="bg-pink-500 hover:bg-pink-600">
+            <Button className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
               Get Started
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden text-gold-400"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -60,55 +60,55 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t bg-white">
-            <div className="flex flex-col gap-4">
+          <div className="md:hidden py-4 border-t border-gold-400 bg-maroon-900">
+            <div className="flex flex-col gap-4 font-cormorant text-lg">
               <Link 
                 to="/" 
-                className="hover:text-pink-500 transition-colors px-4 py-2"
+                className="text-gold-300 hover:text-gold-400 transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 to="/services" 
-                className="hover:text-pink-500 transition-colors px-4 py-2"
+                className="text-gold-300 hover:text-gold-400 transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
               </Link>
               <Link 
                 to="/vendors" 
-                className="hover:text-pink-500 transition-colors px-4 py-2"
+                className="text-gold-300 hover:text-gold-400 transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Vendors
               </Link>
               <Link 
                 to="/gallery" 
-                className="hover:text-pink-500 transition-colors px-4 py-2"
+                className="text-gold-300 hover:text-gold-400 transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Gallery
               </Link>
               <Link 
                 to="/blog" 
-                className="hover:text-pink-500 transition-colors px-4 py-2"
+                className="text-gold-300 hover:text-gold-400 transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blog
               </Link>
               <Link 
                 to="/contact" 
-                className="hover:text-pink-500 transition-colors px-4 py-2"
+                className="text-gold-300 hover:text-gold-400 transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
-              <div className="flex flex-col gap-2 px-4 pt-4 border-t">
-                <Button variant="outline" className="w-full">
+              <div className="flex flex-col gap-2 px-4 pt-4 border-t border-gold-400">
+                <Button variant="outline" className="w-full border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant">
                   Sign In
                 </Button>
-                <Button className="w-full bg-pink-500 hover:bg-pink-600">
+                <Button className="w-full bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
                   Get Started
                 </Button>
               </div>

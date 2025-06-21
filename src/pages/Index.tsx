@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Calendar, Users, Camera, MapPin, Star } from "lucide-react";
+import { ArrowRight, Calendar, Heart, MapPin, Star, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,155 +12,70 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-purple-50">
+      <section className="relative pt-24 pb-20 px-4 royal-gradient">
         <div className="absolute inset-0 bg-black/20"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
-          }}
-        ></div>
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Your Dream Event
-            <span className="block text-pink-300">Starts Here</span>
+        <div className="relative max-w-7xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-cinzel font-bold mb-6 text-gold-400">
+            Royal Event Planning
           </h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Plan your perfect event with India's most trusted event planning platform
+          <p className="text-xl md:text-2xl text-gold-200 max-w-3xl mx-auto mb-8 font-cormorant">
+            Transform your special moments into majestic celebrations with India's premier event planning platform
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 text-lg">
-              Start Planning
+            <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold text-lg px-8 py-6">
+              Start Planning <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-pink-500 px-8 py-6 text-lg">
-              Browse Vendors
+            <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold text-lg px-8 py-6">
+              Explore Services
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 px-4">
+      {/* Features Section */}
+      <section className="py-20 px-4 bg-maroon-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Event Services</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need for your perfect event, all in one place
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+              Why Choose Aaroham
+            </h2>
+            <p className="text-xl text-gold-200 max-w-3xl mx-auto font-cormorant">
+              Experience the finest in event planning with our royal touch and attention to detail
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Camera className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Event Photography</CardTitle>
-                <CardDescription>
-                  Capture your special moments with professional photographers
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full">View Photographers</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <MapPin className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Event Venues</CardTitle>
-                <CardDescription>
-                  Find the perfect venue for your dream event celebration
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full">Browse Venues</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Heart className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Event Planners</CardTitle>
-                <CardDescription>
-                  Professional planners to make your event stress-free
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full">Find Planners</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Catering Services</CardTitle>
-                <CardDescription>
-                  Delicious food and beverages for your event guests
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full">View Caterers</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Calendar className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Event Planning</CardTitle>
-                <CardDescription>
-                  Complete event planning tools and checklists
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full">Start Planning</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Star className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Decoration Services</CardTitle>
-                <CardDescription>
-                  Professional decoration services for your special event
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full">Find Decorators</Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Vendors Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Featured Vendors</h2>
-            <p className="text-lg text-muted-foreground">
-              Top-rated event vendors trusted by thousands of clients
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <Card key={i} className="hover:shadow-lg transition-shadow">
-                <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded-t-lg"></div>
-                <CardHeader>
-                  <CardTitle className="text-lg">Event Vendor {i}</CardTitle>
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                    <span className="text-sm text-muted-foreground ml-1">4.9</span>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: Users,
+                title: "Expert Planners",
+                description: "Professional event coordinators with years of royal event experience"
+              },
+              {
+                icon: MapPin,
+                title: "Premium Venues",
+                description: "Curated selection of luxury venues fit for royal celebrations"
+              },
+              {
+                icon: Star,
+                title: "5-Star Service",
+                description: "Impeccable service that exceeds expectations every time"
+              },
+              {
+                icon: Calendar,
+                title: "Timely Execution",
+                description: "Flawless execution with precision timing and attention to detail"
+              }
+            ].map((feature, index) => (
+              <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 transition-all hover:shadow-lg hover:shadow-gold-400/20">
+                <CardHeader className="text-center">
+                  <feature.icon className="h-12 w-12 text-gold-400 mx-auto mb-4" />
+                  <CardTitle className="text-gold-400 font-cinzel text-xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Professional event services with years of experience
-                  </p>
-                  <Button variant="outline" size="sm" className="w-full">
-                    View Details
-                  </Button>
+                  <CardDescription className="text-gold-200 text-center font-cormorant text-lg">
+                    {feature.description}
+                  </CardDescription>
                 </CardContent>
               </Card>
             ))}
@@ -168,20 +83,133 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 px-4 bg-pink-500 text-white">
+      {/* Services Preview */}
+      <section className="py-20 px-4 bg-maroon-950">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+              Our Royal Services
+            </h2>
+            <p className="text-xl text-gold-200 max-w-3xl mx-auto font-cormorant">
+              From intimate gatherings to grand celebrations, we make every event extraordinary
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {[
+              {
+                title: "Corporate Events",
+                description: "Professional corporate gatherings with royal elegance",
+                image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                title: "Social Celebrations",
+                description: "Birthday parties and personal milestones made memorable",
+                image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              },
+              {
+                title: "Cultural Events",
+                description: "Traditional celebrations with modern royal touch",
+                image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              }
+            ].map((service, index) => (
+              <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 transition-all overflow-hidden hover:shadow-lg hover:shadow-gold-400/20">
+                <div className="aspect-video overflow-hidden">
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-gold-400 font-cinzel text-xl">{service.title}</CardTitle>
+                  <CardDescription className="text-gold-200 font-cormorant text-lg">
+                    {service.description}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Link to="/services">
+              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold text-lg px-8 py-6">
+                View All Services <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 px-4 bg-maroon-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+              Royal Testimonials
+            </h2>
+            <p className="text-xl text-gold-200 max-w-3xl mx-auto font-cormorant">
+              Hear from our satisfied clients about their royal event experiences
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Priya Sharma",
+                event: "Corporate Gala",
+                comment: "Aaroham made our company gala feel like a royal affair. The attention to detail was exceptional."
+              },
+              {
+                name: "Rajesh Kumar",
+                event: "Anniversary Celebration",
+                comment: "Our 25th anniversary celebration was beyond our dreams. Truly a royal experience!"
+              },
+              {
+                name: "Sneha Patel",
+                event: "Birthday Party",
+                comment: "The team at Aaroham transformed our daughter's birthday into a fairy tale celebration."
+              }
+            ].map((testimonial, index) => (
+              <Card key={index} className="bg-maroon-800 border-gold-600">
+                <CardHeader>
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-gold-400 text-gold-400" />
+                    ))}
+                  </div>
+                  <CardTitle className="text-gold-400 font-cinzel">{testimonial.name}</CardTitle>
+                  <CardDescription className="text-gold-300 font-cormorant text-base">
+                    {testimonial.event}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gold-200 font-cormorant text-lg italic">
+                    "{testimonial.comment}"
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 royal-gradient">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Plan Your Dream Event?</h2>
-          <p className="text-xl mb-8">
-            Join thousands of clients who have planned their perfect events with us
+          <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+            Ready to Plan Your Royal Event?
+          </h2>
+          <p className="text-xl text-gold-200 mb-8 font-cormorant">
+            Let us bring your vision to life with our expert planning and royal touch
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">
-              Get Started Today
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-pink-500 px-8 py-6 text-lg">
-              Contact Us
-            </Button>
+            <Link to="/contact">
+              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold text-lg px-8 py-6">
+                Get Started Today
+              </Button>
+            </Link>
+            <Link to="/gallery">
+              <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold text-lg px-8 py-6">
+                View Our Portfolio
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
