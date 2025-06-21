@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
@@ -103,4 +102,119 @@
 
 .golden-gradient {
   background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #ffed4a 100%);
+}
+
+/* Metallic Glitter Gold Text Effects */
+.metallic-gold {
+  background: linear-gradient(135deg, 
+    #ffd700 0%, 
+    #ffed4a 15%, 
+    #d4af37 30%, 
+    #ffd700 45%, 
+    #ffed4a 60%, 
+    #d4af37 75%, 
+    #ffd700 90%, 
+    #ffed4a 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.metallic-gold-subtle {
+  background: linear-gradient(135deg, 
+    #d4af37 0%, 
+    #ffd700 25%, 
+    #ffed4a 50%, 
+    #ffd700 75%, 
+    #d4af37 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+}
+
+.metallic-gold-bright {
+  background: linear-gradient(135deg, 
+    #ffd700 0%, 
+    #ffed4a 10%, 
+    #fff700 20%, 
+    #ffd700 30%, 
+    #ffed4a 40%, 
+    #fff700 50%, 
+    #ffd700 60%, 
+    #ffed4a 70%, 
+    #fff700 80%, 
+    #ffd700 90%, 
+    #ffed4a 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s ease-in-out infinite;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.4), 0 0 25px rgba(255, 215, 0, 0.2);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glitter effect overlay */
+.glitter-text {
+  position: relative;
+}
+
+.glitter-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.8) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, rgba(255, 237, 74, 0.8) 1px, transparent 1px),
+    radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.8) 1px, transparent 1px),
+    radial-gradient(circle at 60% 60%, rgba(255, 215, 0, 0.8) 1px, transparent 1px);
+  background-size: 30px 30px, 40px 40px, 25px 25px, 35px 35px;
+  animation: glitter 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes glitter {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(5px) translateY(-5px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-3px) translateY(3px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(3px) translateY(-2px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
 }

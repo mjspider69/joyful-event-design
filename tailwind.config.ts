@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -50,6 +49,19 @@ export default {
 					800: '#854d0e',
 					900: '#713f12',
 					950: '#422006',
+				},
+				'metallic-gold': {
+					50: '#fffef7',
+					100: '#fffaeb',
+					200: '#fff2c7',
+					300: '#ffe89e',
+					400: '#ffd700',
+					500: '#ffed4a',
+					600: '#d4af37',
+					700: '#b8860b',
+					800: '#9a7209',
+					900: '#7d5e08',
+					950: '#4a3505',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -116,11 +128,46 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				shimmer: {
+					'0%': {
+						backgroundPosition: '0% 50%'
+					},
+					'50%': {
+						backgroundPosition: '100% 50%'
+					},
+					'100%': {
+						backgroundPosition: '0% 50%'
+					}
+				},
+				glitter: {
+					'0%': {
+						transform: 'translateX(0) translateY(0)',
+						opacity: '1'
+					},
+					'25%': {
+						transform: 'translateX(5px) translateY(-5px)',
+						opacity: '0.8'
+					},
+					'50%': {
+						transform: 'translateX(-3px) translateY(3px)',
+						opacity: '1'
+					},
+					'75%': {
+						transform: 'translateX(3px) translateY(-2px)',
+						opacity: '0.9'
+					},
+					'100%': {
+						transform: 'translateX(0) translateY(0)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				shimmer: 'shimmer 3s ease-in-out infinite',
+				glitter: 'glitter 4s linear infinite'
 			}
 		}
 	},

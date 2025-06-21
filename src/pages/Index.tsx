@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Calendar, Heart, MapPin, Star, Users } from "lucide-react";
@@ -15,10 +14,10 @@ const Index = () => {
       <section className="relative pt-24 pb-20 px-4 royal-gradient">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-cinzel font-bold mb-6 text-gold-400">
+          <h1 className="text-5xl md:text-7xl font-cinzel font-bold mb-6 metallic-gold-bright glitter-text">
             Royal Event Planning
           </h1>
-          <p className="text-xl md:text-2xl text-gold-200 max-w-3xl mx-auto mb-8 font-cormorant">
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 font-cormorant metallic-gold-subtle">
             Transform your special moments into majestic celebrations with India's premier event planning platform
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -36,10 +35,10 @@ const Index = () => {
       <section className="py-20 px-4 bg-maroon-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 metallic-gold glitter-text">
               Why Choose Aaroham
             </h2>
-            <p className="text-xl text-gold-200 max-w-3xl mx-auto font-cormorant">
+            <p className="text-xl max-w-3xl mx-auto font-cormorant metallic-gold-subtle">
               Experience the finest in event planning with our royal touch and attention to detail
             </p>
           </div>
@@ -70,10 +69,10 @@ const Index = () => {
               <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 transition-all hover:shadow-lg hover:shadow-gold-400/20">
                 <CardHeader className="text-center">
                   <feature.icon className="h-12 w-12 text-gold-400 mx-auto mb-4" />
-                  <CardTitle className="text-gold-400 font-cinzel text-xl">{feature.title}</CardTitle>
+                  <CardTitle className="metallic-gold font-cinzel text-xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gold-200 text-center font-cormorant text-lg">
+                  <CardDescription className="text-center font-cormorant text-lg metallic-gold-subtle">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -87,10 +86,10 @@ const Index = () => {
       <section className="py-20 px-4 bg-maroon-950">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 metallic-gold glitter-text">
               Our Royal Services
             </h2>
-            <p className="text-xl text-gold-200 max-w-3xl mx-auto font-cormorant">
+            <p className="text-xl max-w-3xl mx-auto font-cormorant metallic-gold-subtle">
               From intimate gatherings to grand celebrations, we make every event extraordinary
             </p>
           </div>
@@ -118,8 +117,8 @@ const Index = () => {
                   <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-gold-400 font-cinzel text-xl">{service.title}</CardTitle>
-                  <CardDescription className="text-gold-200 font-cormorant text-lg">
+                  <CardTitle className="metallic-gold font-cinzel text-xl">{service.title}</CardTitle>
+                  <CardDescription className="font-cormorant text-lg metallic-gold-subtle">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
@@ -141,10 +140,10 @@ const Index = () => {
       <section className="py-20 px-4 bg-maroon-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 metallic-gold glitter-text">
               Royal Testimonials
             </h2>
-            <p className="text-xl text-gold-200 max-w-3xl mx-auto font-cormorant">
+            <p className="text-xl max-w-3xl mx-auto font-cormorant metallic-gold-subtle">
               Hear from our satisfied clients about their royal event experiences
             </p>
           </div>
@@ -174,13 +173,13 @@ const Index = () => {
                       <Star key={i} className="h-5 w-5 fill-gold-400 text-gold-400" />
                     ))}
                   </div>
-                  <CardTitle className="text-gold-400 font-cinzel">{testimonial.name}</CardTitle>
-                  <CardDescription className="text-gold-300 font-cormorant text-base">
+                  <CardTitle className="metallic-gold font-cinzel">{testimonial.name}</CardTitle>
+                  <CardDescription className="font-cormorant text-base metallic-gold-subtle">
                     {testimonial.event}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gold-200 font-cormorant text-lg italic">
+                  <p className="font-cormorant text-lg italic metallic-gold-subtle">
                     "{testimonial.comment}"
                   </p>
                 </CardContent>
@@ -193,10 +192,10 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-20 px-4 royal-gradient">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 text-gold-400">
+          <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 metallic-gold-bright glitter-text">
             Ready to Plan Your Royal Event?
           </h2>
-          <p className="text-xl text-gold-200 mb-8 font-cormorant">
+          <p className="text-xl mb-8 font-cormorant metallic-gold-subtle">
             Let us bring your vision to life with our expert planning and royal touch
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Camera, MapPin, Heart, Users, Calendar, Star, Music, Shirt, Flower, Car } from "lucide-react";
@@ -68,12 +67,12 @@ const Services = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4 bg-gradient-to-br from-pink-50 to-purple-50">
+      <section className="pt-24 pb-12 px-4 bg-gradient-to-br from-maroon-900 to-maroon-950">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 metallic-gold-bright glitter-text font-cinzel">
             Event Services
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto font-cormorant metallic-gold-subtle">
             Complete event solutions under one roof. From planning to execution, 
             we have everything you need for your perfect event.
           </p>
@@ -81,28 +80,28 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-maroon-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow h-full">
+              <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-400/20 transition-all h-full">
                 <CardHeader>
-                  <service.icon className="h-12 w-12 text-pink-500 mb-4" />
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                  <CardDescription className="text-base">
+                  <service.icon className="h-12 w-12 text-gold-400 mb-4" />
+                  <CardTitle className="text-xl metallic-gold font-cinzel">{service.title}</CardTitle>
+                  <CardDescription className="text-base metallic-gold-subtle font-cormorant">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-2 mb-6">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm">
-                        <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                      <li key={idx} className="flex items-center gap-2 text-sm metallic-gold-subtle font-cormorant">
+                        <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
                         {feature}
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full bg-pink-500 hover:bg-pink-600">
+                  <Button className="w-full bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
                     View Providers
                   </Button>
                 </CardContent>
@@ -113,13 +112,13 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-pink-500 text-white">
+      <section className="py-20 px-4 royal-gradient">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Need Help Choosing?</h2>
-          <p className="text-xl mb-8">
+          <h2 className="text-4xl font-bold mb-4 metallic-gold-bright glitter-text font-cinzel">Need Help Choosing?</h2>
+          <p className="text-xl mb-8 metallic-gold-subtle font-cormorant">
             Our event experts are here to help you find the perfect services for your special occasion
           </p>
-          <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">
+          <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg">
             Get Free Consultation
           </Button>
         </div>
