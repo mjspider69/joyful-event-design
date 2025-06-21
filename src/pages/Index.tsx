@@ -17,16 +17,16 @@ const Index = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
+            backgroundImage: "url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
           }}
         ></div>
         <div className="relative z-10 text-center text-white px-4 max-w-4xl">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Your Dream Wedding
+            Your Dream Event
             <span className="block text-pink-300">Starts Here</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Plan your perfect wedding with India's most trusted wedding planning platform
+            Plan your perfect event with India's most trusted event planning platform
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-6 text-lg">
@@ -43,9 +43,9 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Wedding Services</h2>
+            <h2 className="text-4xl font-bold mb-4">Event Services</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need for your perfect wedding day, all in one place
+              Everything you need for your perfect event, all in one place
             </p>
           </div>
           
@@ -53,7 +53,7 @@ const Index = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Camera className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Wedding Photography</CardTitle>
+                <CardTitle>Event Photography</CardTitle>
                 <CardDescription>
                   Capture your special moments with professional photographers
                 </CardDescription>
@@ -66,9 +66,9 @@ const Index = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <MapPin className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Wedding Venues</CardTitle>
+                <CardTitle>Event Venues</CardTitle>
                 <CardDescription>
-                  Find the perfect venue for your dream wedding celebration
+                  Find the perfect venue for your dream event celebration
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -79,9 +79,9 @@ const Index = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Heart className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Wedding Planners</CardTitle>
+                <CardTitle>Event Planners</CardTitle>
                 <CardDescription>
-                  Professional planners to make your wedding stress-free
+                  Professional planners to make your event stress-free
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -94,7 +94,7 @@ const Index = () => {
                 <Users className="h-12 w-12 text-pink-500 mb-2" />
                 <CardTitle>Catering Services</CardTitle>
                 <CardDescription>
-                  Delicious food and beverages for your wedding guests
+                  Delicious food and beverages for your event guests
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -105,9 +105,9 @@ const Index = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Calendar className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Wedding Planning</CardTitle>
+                <CardTitle>Event Planning</CardTitle>
                 <CardDescription>
-                  Complete wedding planning tools and checklists
+                  Complete event planning tools and checklists
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -118,13 +118,13 @@ const Index = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Star className="h-12 w-12 text-pink-500 mb-2" />
-                <CardTitle>Bridal Makeup</CardTitle>
+                <CardTitle>Decoration Services</CardTitle>
                 <CardDescription>
-                  Professional makeup artists for your special day
+                  Professional decoration services for your special event
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button variant="outline" className="w-full">Find Artists</Button>
+                <Button variant="outline" className="w-full">Find Decorators</Button>
               </CardContent>
             </Card>
           </div>
@@ -137,7 +137,7 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Featured Vendors</h2>
             <p className="text-lg text-muted-foreground">
-              Top-rated wedding vendors trusted by thousands of couples
+              Top-rated event vendors trusted by thousands of clients
             </p>
           </div>
           
@@ -146,7 +146,7 @@ const Index = () => {
               <Card key={i} className="hover:shadow-lg transition-shadow">
                 <div className="aspect-square bg-gradient-to-br from-pink-100 to-purple-100 rounded-t-lg"></div>
                 <CardHeader>
-                  <CardTitle className="text-lg">Wedding Vendor {i}</CardTitle>
+                  <CardTitle className="text-lg">Event Vendor {i}</CardTitle>
                   <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star key={star} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -156,7 +156,7 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Professional wedding services with years of experience
+                    Professional event services with years of experience
                   </p>
                   <Button variant="outline" size="sm" className="w-full">
                     View Details
@@ -171,9 +171,9 @@ const Index = () => {
       {/* Call to Action */}
       <section className="py-20 px-4 bg-pink-500 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Plan Your Dream Wedding?</h2>
+          <h2 className="text-4xl font-bold mb-4">Ready to Plan Your Dream Event?</h2>
           <p className="text-xl mb-8">
-            Join thousands of couples who have planned their perfect wedding with us
+            Join thousands of clients who have planned their perfect events with us
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">

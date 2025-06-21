@@ -6,34 +6,34 @@ import { Button } from "@/components/ui/button";
 const Gallery = () => {
   const galleryImages = [
     {
-      url: "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Elegant Wedding Ceremony",
-      category: "Ceremony"
+      url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Corporate Event Setup",
+      category: "Corporate"
     },
     {
-      url: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Beautiful Bridal Portrait",
-      category: "Portrait"
+      url: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Birthday Party Celebration",
+      category: "Birthday"
     },
     {
-      url: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Reception Celebration",
-      category: "Reception"
+      url: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Event Planning Session",
+      category: "Planning"
     },
     {
       url: "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Wedding Photography",
+      title: "Event Photography",
       category: "Photography"
     },
     {
       url: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Outdoor Wedding Setup",
+      title: "Outdoor Event Setup",
       category: "Decoration"
     },
     {
-      url: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Wedding Cake",
-      category: "Details"
+      url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Conference Event",
+      category: "Conference"
     },
     {
       url: "https://images.unsplash.com/photo-1519167758481-83f29c8ea79d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -42,17 +42,17 @@ const Gallery = () => {
     },
     {
       url: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Wedding Planning",
+      title: "Event Planning",
       category: "Planning"
     },
     {
-      url: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      title: "Bridal Makeup",
-      category: "Makeup"
+      url: "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Catering Service",
+      category: "Catering"
     }
   ];
 
-  const categories = ["All", "Ceremony", "Reception", "Portrait", "Decoration", "Details", "Venue"];
+  const categories = ["All", "Corporate", "Birthday", "Conference", "Decoration", "Catering", "Venue"];
 
   return (
     <div className="min-h-screen bg-background">
@@ -62,11 +62,11 @@ const Gallery = () => {
       <section className="pt-24 pb-12 px-4 bg-gradient-to-br from-pink-50 to-purple-50">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Wedding Gallery
+            Event Gallery
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Get inspired by beautiful wedding moments captured by our professional photographers. 
-            Browse through stunning ceremonies, receptions, and intimate moments.
+            Get inspired by beautiful event moments captured by our professional photographers. 
+            Browse through stunning corporate events, celebrations, and memorable occasions.
           </p>
         </div>
       </section>
@@ -124,9 +124,9 @@ const Gallery = () => {
       {/* CTA Section */}
       <section className="py-20 px-4 bg-pink-500 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Want Your Wedding Featured?</h2>
+          <h2 className="text-4xl font-bold mb-4">Want Your Event Featured?</h2>
           <p className="text-xl mb-8">
-            Share your beautiful wedding moments with us and inspire other couples
+            Share your beautiful event moments with us and inspire other clients
           </p>
           <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">
             Submit Your Photos

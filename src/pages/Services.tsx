@@ -9,57 +9,57 @@ const Services = () => {
   const services = [
     {
       icon: Camera,
-      title: "Wedding Photography",
-      description: "Capture your precious moments with professional photographers who specialize in weddings.",
-      features: ["Pre-wedding shoots", "Wedding day coverage", "Photo albums", "Digital galleries"]
+      title: "Event Photography",
+      description: "Capture your precious moments with professional photographers who specialize in events.",
+      features: ["Pre-event shoots", "Event day coverage", "Photo albums", "Digital galleries"]
     },
     {
       icon: MapPin,
-      title: "Wedding Venues",
-      description: "Find the perfect venue for your dream wedding from our curated list of locations.",
-      features: ["Indoor venues", "Outdoor locations", "Destination weddings", "Venue decoration"]
+      title: "Event Venues",
+      description: "Find the perfect venue for your dream event from our curated list of locations.",
+      features: ["Indoor venues", "Outdoor locations", "Corporate venues", "Venue decoration"]
     },
     {
       icon: Heart,
-      title: "Wedding Planners",
-      description: "Professional wedding planners to make your special day stress-free and memorable.",
-      features: ["Full wedding planning", "Day-of coordination", "Budget management", "Timeline creation"]
+      title: "Event Planners",
+      description: "Professional event planners to make your special day stress-free and memorable.",
+      features: ["Full event planning", "Day-of coordination", "Budget management", "Timeline creation"]
     },
     {
       icon: Users,
       title: "Catering Services",
-      description: "Delicious food and beverages to delight your wedding guests.",
+      description: "Delicious food and beverages to delight your event guests.",
       features: ["Multi-cuisine menus", "Live counters", "Cocktail services", "Dietary accommodations"]
     },
     {
       icon: Star,
-      title: "Bridal Makeup",
-      description: "Professional makeup artists to make you look stunning on your wedding day.",
-      features: ["Bridal makeup", "Hair styling", "Mehendi artists", "Grooming for groom"]
+      title: "Decoration Services",
+      description: "Professional decorators to make your event look stunning.",
+      features: ["Theme decoration", "Floral arrangements", "Lighting setup", "Stage decoration"]
     },
     {
       icon: Music,
       title: "Entertainment",
-      description: "Musical entertainment and DJ services to keep your guests dancing all night.",
+      description: "Musical entertainment and DJ services to keep your guests engaged all night.",
       features: ["Live bands", "DJ services", "Sound systems", "Dance performances"]
     },
     {
       icon: Shirt,
-      title: "Wedding Attire",
-      description: "Beautiful wedding outfits and accessories for the bride and groom.",
-      features: ["Bridal lehengas", "Groom sherwanis", "Jewelry rental", "Styling consultation"]
+      title: "Event Styling",
+      description: "Beautiful styling and theme coordination for your event.",
+      features: ["Theme styling", "Color coordination", "Props rental", "Styling consultation"]
     },
     {
       icon: Flower,
       title: "Floral Decoration",
-      description: "Stunning floral arrangements and decorations for your wedding ceremony.",
-      features: ["Mandap decoration", "Stage decoration", "Bridal bouquets", "Centerpieces"]
+      description: "Stunning floral arrangements and decorations for your event.",
+      features: ["Stage decoration", "Table centerpieces", "Entrance decoration", "Floral arrangements"]
     },
     {
       icon: Car,
       title: "Transportation",
-      description: "Luxury transportation services for the wedding party and guests.",
-      features: ["Bridal car rental", "Guest transportation", "Airport transfers", "Decorated vehicles"]
+      description: "Luxury transportation services for guests and organizers.",
+      features: ["Guest transportation", "VIP car rental", "Airport transfers", "Decorated vehicles"]
     }
   ];
 
@@ -71,11 +71,11 @@ const Services = () => {
       <section className="pt-24 pb-12 px-4 bg-gradient-to-br from-pink-50 to-purple-50">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Wedding Services
+            Event Services
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Complete wedding solutions under one roof. From planning to execution, 
-            we have everything you need for your perfect wedding day.
+            Complete event solutions under one roof. From planning to execution, 
+            we have everything you need for your perfect event.
           </p>
         </div>
       </section>
@@ -117,7 +117,7 @@ const Services = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">Need Help Choosing?</h2>
           <p className="text-xl mb-8">
-            Our wedding experts are here to help you find the perfect services for your special day
+            Our event experts are here to help you find the perfect services for your special occasion
           </p>
           <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">
             Get Free Consultation

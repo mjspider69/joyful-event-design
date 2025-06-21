@@ -19,8 +19,8 @@ const Contact = () => {
             Contact Us
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have questions about planning your wedding? We're here to help! 
-            Get in touch with our wedding experts.
+            Have questions about planning your event? We're here to help! 
+            Get in touch with our event experts.
           </p>
         </div>
       </section>
@@ -58,8 +58,8 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="weddingDate">Wedding Date</Label>
-                    <Input id="weddingDate" type="date" />
+                    <Label htmlFor="eventDate">Event Date</Label>
+                    <Input id="eventDate" type="date" />
                   </div>
                   
                   <div>
@@ -83,7 +83,7 @@ const Contact = () => {
                       id="message"
                       rows={4}
                       className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Tell us about your dream wedding..."
+                      placeholder="Tell us about your dream event..."
                     ></textarea>
                   </div>
                   
@@ -105,7 +105,7 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    123 Wedding Street, Bandra West<br />
+                    123 Event Street, Bandra West<br />
                     Mumbai, Maharashtra 400050<br />
                     India
                   </p>
@@ -136,8 +136,8 @@ const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    hello@wedplanner.in<br />
-                    support@wedplanner.in
+                    hello@aaroham.in<br />
+                    support@aaroham.in
                   </p>
                 </CardContent>
               </Card>
@@ -154,7 +154,7 @@ const Contact = () => {
                     <p>Monday - Saturday: 9:00 AM - 6:00 PM</p>
                     <p>Sunday: Closed</p>
                     <p className="text-sm pt-2">
-                      *Emergency support available 24/7 for ongoing weddings
+                      *Emergency support available 24/7 for ongoing events
                     </p>
                   </div>
                 </CardContent>

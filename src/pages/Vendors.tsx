@@ -36,17 +36,17 @@ const Vendors = () => {
       image: "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
-      name: "Glamour Bridal Studio",
-      category: "Makeup",
+      name: "Glamour Decoration Studio",
+      category: "Decoration",
       location: "Pune, Maharashtra",
       rating: 4.9,
       reviews: 78,
       price: "₹25,000 - ₹75,000",
-      image: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+      image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
-      name: "Dream Planners",
-      category: "Wedding Planner",
+      name: "Dream Event Planners",
+      category: "Event Planner",
       location: "Jaipur, Rajasthan",
       rating: 4.8,
       reviews: 92,
@@ -72,11 +72,11 @@ const Vendors = () => {
       <section className="pt-24 pb-12 px-4 bg-gradient-to-br from-pink-50 to-purple-50">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
-            Find Wedding Vendors
+            Find Event Vendors
           </h1>
           <p className="text-xl text-muted-foreground text-center mb-8 max-w-3xl mx-auto">
-            Discover trusted wedding vendors in your city. Compare prices, read reviews, 
-            and book the perfect professionals for your special day.
+            Discover trusted event vendors in your city. Compare prices, read reviews, 
+            and book the perfect professionals for your special occasion.
           </p>
           
           {/* Search Bar */}
@@ -115,7 +115,7 @@ const Vendors = () => {
             <Button variant="outline">Photography</Button>
             <Button variant="outline">Venues</Button>
             <Button variant="outline">Catering</Button>
-            <Button variant="outline">Makeup</Button>
+            <Button variant="outline">Decoration</Button>
             <Button variant="outline">Planners</Button>
             <Button variant="outline">Entertainment</Button>
           </div>
