@@ -11,6 +11,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import VendorLogin from "./pages/VendorLogin";
 import CustomerLogin from "./pages/CustomerLogin";
+import AdminLogin from "./pages/AdminLogin";
 import Booking from "./pages/Booking";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/vendor-login" element={<VendorLogin />} />
           <Route path="/customer-login" element={<CustomerLogin />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/booking" element={<Booking />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Calendar, Heart, MapPin, Star, Users, Camera, Music, Flower, Trophy } from "lucide-react";
@@ -54,30 +55,30 @@ const Index = () => {
       <section className="pt-20 pb-12 px-4 min-h-screen flex items-center" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-7xl font-bold mb-6 metallic-gold-bright glitter-text font-cinzel leading-tight">
+            <div className="animate-fade-in">
+              <h1 className="text-4xl md:text-7xl font-bold mb-6 metallic-gold-bright font-cinzel leading-tight animate-slide-in-left">
                 Create Royal Events That Last Forever
               </h1>
-              <p className="text-xl md:text-2xl mb-8 metallic-gold-subtle font-cormorant leading-relaxed">
+              <p className="text-xl md:text-2xl mb-8 metallic-gold-subtle font-cormorant leading-relaxed animate-slide-in-left" style={{animationDelay: '0.2s'}}>
                 India's most trusted event planning platform. We transform your dreams into magnificent celebrations with royal elegance and unmatched sophistication.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 animate-slide-in-left" style={{animationDelay: '0.4s'}}>
                 <Link to="/booking">
-                  <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg">
+                  <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
                     Start Planning <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
                 <Link to="/services">
-                  <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg">
+                  <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
                     Explore Services
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="relative">
-              <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Elegant Event Setup" className="rounded-lg shadow-2xl border-2 border-gold-400" />
-              <div className="absolute -bottom-4 -right-4 bg-gold-500 text-maroon-900 p-4 rounded-lg font-cinzel font-bold">
-                <Trophy className="h-6 w-6 mb-2" />
+            <div className="relative animate-slide-in-right">
+              <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Elegant Event Setup" className="rounded-lg shadow-2xl border-2 border-gold-400 hover-lift interactive-element" />
+              <div className="absolute -bottom-4 -right-4 bg-gold-500 text-maroon-900 p-4 rounded-lg font-cinzel font-bold animate-bounce-in hover-glow">
+                <Trophy className="h-6 w-6 mb-2 animate-float" />
                 Award Winning
               </div>
             </div>
@@ -88,8 +89,8 @@ const Index = () => {
       {/* Featured Services */}
       <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright glitter-text font-cinzel">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright font-cinzel">
               Our Royal Services
             </h2>
             <p className="text-xl metallic-gold-subtle font-cormorant max-w-3xl mx-auto">
@@ -98,12 +99,12 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredServices.map((service, index) => <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-400/20 transition-all overflow-hidden">
+            {featuredServices.map((service, index) => <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-400/20 transition-all overflow-hidden hover-lift interactive-element animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
                 <div className="aspect-square bg-gray-200 overflow-hidden">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                 </div>
                 <CardHeader className="text-center">
-                  <service.icon className="h-12 w-12 text-gold-400 mx-auto mb-4" />
+                  <service.icon className="h-12 w-12 text-gold-400 mx-auto mb-4 animate-float" />
                   <CardTitle className="text-xl metallic-gold font-cinzel">{service.title}</CardTitle>
                   <CardDescription className="metallic-gold-subtle font-cormorant">
                     {service.description}
@@ -112,9 +113,9 @@ const Index = () => {
               </Card>)}
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 animate-fade-in" style={{animationDelay: '0.6s'}}>
             <Link to="/services">
-              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
+              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold hover-scale interactive-element">
                 View All Services <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
@@ -126,20 +127,20 @@ const Index = () => {
       <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2">500+</div>
+            <div className="animate-bounce-in" style={{animationDelay: '0.1s'}}>
+              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">500+</div>
               <div className="metallic-gold-subtle font-cormorant text-lg">Events Completed</div>
             </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2">50+</div>
+            <div className="animate-bounce-in" style={{animationDelay: '0.2s'}}>
+              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">50+</div>
               <div className="metallic-gold-subtle font-cormorant text-lg">Expert Vendors</div>
             </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2">25+</div>
+            <div className="animate-bounce-in" style={{animationDelay: '0.3s'}}>
+              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">25+</div>
               <div className="metallic-gold-subtle font-cormorant text-lg">Cities Covered</div>
             </div>
-            <div>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2">4.9</div>
+            <div className="animate-bounce-in" style={{animationDelay: '0.4s'}}>
+              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">4.9</div>
               <div className="metallic-gold-subtle font-cormorant text-lg">Average Rating</div>
             </div>
           </div>
@@ -149,24 +150,24 @@ const Index = () => {
       {/* Testimonials */}
       <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright glitter-text font-cinzel">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright font-cinzel">
               What Our Clients Say
             </h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => <Card key={index} className="bg-maroon-800 border-gold-600">
+            {testimonials.map((testimonial, index) => <Card key={index} className="bg-maroon-800 border-gold-600 hover-lift interactive-element animate-slide-in-right" style={{animationDelay: `${index * 0.2}s`}}>
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
-                    <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full border-2 border-gold-400 mr-4" />
+                    <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full border-2 border-gold-400 mr-4 hover-scale" />
                     <div>
                       <h4 className="font-semibold metallic-gold font-cormorant">{testimonial.name}</h4>
                       <p className="text-sm metallic-gold-subtle font-cormorant">{testimonial.event}</p>
                     </div>
                   </div>
                   <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
+                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400 animate-float" style={{animationDelay: `${i * 0.1}s`}} />)}
                   </div>
                   <p className="metallic-gold-subtle font-cormorant italic">"{testimonial.text}"</p>
                 </CardContent>
@@ -177,21 +178,21 @@ const Index = () => {
 
       {/* CTA Section */}
       <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 metallic-gold-bright glitter-text font-cinzel">
+        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 metallic-gold-bright font-cinzel animate-slide-in-left">
             Ready to Create Your Royal Event?
           </h2>
-          <p className="text-xl mb-8 metallic-gold-subtle font-cormorant">
+          <p className="text-xl mb-8 metallic-gold-subtle font-cormorant animate-slide-in-right">
             Join thousands of satisfied customers who trusted us with their special moments
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-bounce-in" style={{animationDelay: '0.4s'}}>
             <Link to="/booking">
-              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg">
+              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
                 Book Your Event <Calendar className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg">
+              <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
                 Get Free Quote
               </Button>
             </Link>
