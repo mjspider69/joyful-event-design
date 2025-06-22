@@ -49,7 +49,7 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 royal-gradient min-h-screen flex items-center">
+      <section className="pt-20 pb-12 px-4 royal-gradient min-h-screen flex items-center bg-[t#800000] bg-[#6e0101]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-[t#] bg-[#5a0202]">
             <div>
