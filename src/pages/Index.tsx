@@ -4,6 +4,7 @@ import { ArrowRight, Calendar, Heart, MapPin, Star, Users, Camera, Music, Flower
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 const Index = () => {
   const featuredServices = [{
     icon: Camera,
@@ -45,13 +46,14 @@ const Index = () => {
     text: "They transformed our vision into reality. The attention to detail was remarkable!",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
   }];
-  return <div className="min-h-screen bg-background">
+
+  return <div className="min-h-screen" style={{ backgroundColor: '#5a0202' }}>
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 royal-gradient min-h-screen flex items-center bg-[t#800000] bg-[#6e0101]">
+      <section className="pt-20 pb-12 px-4 min-h-screen flex items-center" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-[t#] bg-[#5a0202]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-7xl font-bold mb-6 metallic-gold-bright glitter-text font-cinzel leading-tight">
                 Create Royal Events That Last Forever
@@ -84,7 +86,7 @@ const Index = () => {
       </section>
 
       {/* Featured Services */}
-      <section className="py-20 px-4 bg-maroon-900">
+      <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright glitter-text font-cinzel">
@@ -121,7 +123,7 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-maroon-800 to-maroon-900">
+      <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
@@ -145,7 +147,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-maroon-900">
+      <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright glitter-text font-cinzel">
@@ -174,7 +176,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 royal-gradient">
+      <section className="py-20 px-4" style={{ backgroundColor: '#5a0202' }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 metallic-gold-bright glitter-text font-cinzel">
             Ready to Create Your Royal Event?
@@ -200,4 +202,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
