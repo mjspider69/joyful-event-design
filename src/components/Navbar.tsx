@@ -1,15 +1,11 @@
-
 import { Button } from "@/components/ui/button";
 import { Heart, Menu, X, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-maroon-900/95 backdrop-blur-sm border-b border-gold-400 animate-fade-in">
-      <div className="max-w-7xl mx-auto px-4">
+  return <nav className="fixed top-0 left-0 right-0 z-50 bg-maroon-900/95 backdrop-blur-sm border-b border-gold-400 animate-fade-in">
+      <div className="max-w-7xl mx-auto px-4 bg-[t#5a0202_] bg-[#5a0202]">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 font-cinzel font-bold text-3xl metallic-gold-bright hover-scale interactive-element">
@@ -57,51 +53,27 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gold-400 hover-scale"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
+          <button className="md:hidden text-gold-400 hover-scale" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gold-400 bg-maroon-900 animate-slide-in-right">
+        {isMenuOpen && <div className="md:hidden py-4 border-t border-gold-400 bg-maroon-900 animate-slide-in-right">
             <div className="flex flex-col gap-4 font-cormorant text-lg">
-              <Link 
-                to="/" 
-                className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/" className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift" onClick={() => setIsMenuOpen(false)}>
                 Home
               </Link>
-              <Link 
-                to="/services" 
-                className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/services" className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift" onClick={() => setIsMenuOpen(false)}>
                 Services
               </Link>
-              <Link 
-                to="/vendors" 
-                className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/vendors" className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift" onClick={() => setIsMenuOpen(false)}>
                 Vendors
               </Link>
-              <Link 
-                to="/gallery" 
-                className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/gallery" className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift" onClick={() => setIsMenuOpen(false)}>
                 Gallery
               </Link>
-              <Link 
-                to="/contact" 
-                className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/contact" className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2 hover-lift" onClick={() => setIsMenuOpen(false)}>
                 Contact
               </Link>
               <div className="flex flex-col gap-2 px-4 pt-4 border-t border-gold-400">
@@ -123,11 +95,8 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-          </div>
-        )}
+          </div>}
       </div>
-    </nav>
-  );
+    </nav>;
 };
-
 export default Navbar;
