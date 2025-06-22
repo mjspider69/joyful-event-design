@@ -31,9 +31,6 @@ const Navbar = () => {
             <Link to="/gallery" className="metallic-gold-subtle hover:metallic-gold transition-all">
               Gallery
             </Link>
-            <Link to="/blog" className="metallic-gold-subtle hover:metallic-gold transition-all">
-              Blog
-            </Link>
             <Link to="/contact" className="metallic-gold-subtle hover:metallic-gold transition-all">
               Contact
             </Link>
@@ -41,12 +38,16 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant">
-              Sign In
-            </Button>
-            <Button className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
-              Get Started
-            </Button>
+            <Link to="/customer-login">
+              <Button variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant">
+                Customer Login
+              </Button>
+            </Link>
+            <Link to="/vendor-login">
+              <Button className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
+                Vendor Login
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,13 +92,6 @@ const Navbar = () => {
                 Gallery
               </Link>
               <Link 
-                to="/blog" 
-                className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Blog
-              </Link>
-              <Link 
                 to="/contact" 
                 className="metallic-gold-subtle hover:metallic-gold transition-all px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
@@ -105,12 +99,16 @@ const Navbar = () => {
                 Contact
               </Link>
               <div className="flex flex-col gap-2 px-4 pt-4 border-t border-gold-400">
-                <Button variant="outline" className="w-full border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant">
-                  Sign In
-                </Button>
-                <Button className="w-full bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
-                  Get Started
-                </Button>
+                <Link to="/customer-login">
+                  <Button variant="outline" className="w-full border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant">
+                    Customer Login
+                  </Button>
+                </Link>
+                <Link to="/vendor-login">
+                  <Button className="w-full bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold">
+                    Vendor Login
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
