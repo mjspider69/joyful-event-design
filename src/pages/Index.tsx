@@ -1,234 +1,358 @@
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Calendar, Heart, MapPin, Star, Users, Camera, Music, Flower, Trophy } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Heart, Star, Calendar, Users, MapPin, Phone, Mail, MessageCircle, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AIChat from "@/components/AIChat";
+import AdvancedBookingFlow from "@/components/AdvancedBookingFlow";
+
 const Index = () => {
-  const featuredServices = [{
-    icon: Camera,
-    title: "Photography",
-    description: "Professional event photography to capture every precious moment",
-    image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  }, {
-    icon: MapPin,
-    title: "Venues",
-    description: "Stunning venues for unforgettable celebrations",
-    image: "https://images.unsplash.com/photo-1519167758481-83f29c8ea79d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  }, {
-    icon: Users,
-    title: "Catering",
-    description: "Exquisite cuisine and dining experiences",
-    image: "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  }, {
-    icon: Flower,
-    title: "Decoration",
-    description: "Beautiful decorations that tell your story",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-  }];
-  const testimonials = [{
-    name: "Priya Sharma",
-    event: "Birthday Celebration",
-    rating: 5,
-    text: "Aaroham made my daughter's birthday absolutely magical! Every detail was perfect.",
-    image: "https://images.unsplash.com/photo-1494790108755-2616c9088248?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-  }, {
-    name: "Rajesh Kumar",
-    event: "Corporate Event",
-    rating: 5,
-    text: "Professional service and exceptional execution. Our company event was a huge success!",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-  }, {
-    name: "Anita Patel",
-    event: "Anniversary Celebration",
-    rating: 5,
-    text: "They transformed our vision into reality. The attention to detail was remarkable!",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-  }];
-  return <div className="min-h-screen" style={{
-    backgroundColor: '#5a0202'
-  }}>
+  const [isAIChatOpen, setIsAIChatOpen] = useState(false);
+  const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
+
+  const services = [
+    {
+      icon: "📸",
+      title: "Photography & Videography",
+      description: "Capture your precious moments with our professional photographers and videographers",
+      price: "Starting from ₹25,000"
+    },
+    {
+      icon: "🎊",
+      title: "Decoration & Design",
+      description: "Transform your venue with stunning decorations and floral arrangements",
+      price: "Starting from ₹35,000"
+    },
+    {
+      icon: "🍽️",
+      title: "Catering Services",
+      description: "Delicious multi-cuisine catering with customizable menu options",
+      price: "Starting from ₹400/plate"
+    },
+    {
+      icon: "🎵",
+      title: "Entertainment & Music",
+      description: "Professional DJs, live bands, and entertainment for your special day",
+      price: "Starting from ₹15,000"
+    },
+    {
+      icon: "💄",
+      title: "Makeup & Styling",
+      description: "Professional bridal makeup and styling services",
+      price: "Starting from ₹12,000"
+    },
+    {
+      icon: "🏰",
+      title: "Venue Management",
+      description: "Beautiful venues with complete event management services",
+      price: "Starting from ₹50,000"
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Priya & Raj",
+      event: "Wedding",
+      rating: 5,
+      text: "Absolutely wonderful experience! The team made our dream wedding come true. Every detail was perfect.",
+      image: "/placeholder.svg"
+    },
+    {
+      name: "Anjali & Vikram",
+      event: "Reception",
+      rating: 5,
+      text: "Professional service and beautiful arrangements. Our guests are still talking about the amazing event!",
+      image: "/placeholder.svg"
+    },
+    {
+      name: "Meera & Arjun",
+      event: "Engagement",
+      rating: 5,
+      text: "From planning to execution, everything was seamless. Highly recommended for any celebration!",
+      image: "/placeholder.svg"
+    }
+  ];
+
+  const packages = [
+    {
+      name: "Silver Package",
+      price: "₹2,50,000",
+      features: [
+        "Basic Photography (6 hours)",
+        "Simple Decoration",
+        "DJ Services",
+        "Basic Catering (100 guests)",
+        "Event Coordination"
+      ],
+      popular: false
+    },
+    {
+      name: "Gold Package",
+      price: "₹5,00,000",
+      features: [
+        "Premium Photography & Videography",
+        "Designer Decorations",
+        "Live Music & DJ",
+        "Multi-cuisine Catering (200 guests)",
+        "Bridal Makeup",
+        "Complete Event Management"
+      ],
+      popular: true
+    },
+    {
+      name: "Platinum Package",
+      price: "₹10,00,000",
+      features: [
+        "Cinematic Photography & Videos",
+        "Luxury Decorations & Themes",
+        "Celebrity DJ & Live Band",
+        "Premium Catering (300+ guests)",
+        "Professional Makeup Team",
+        "Dedicated Wedding Planner",
+        "Venue Decoration & Lighting"
+      ],
+      popular: false
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-12 px-4 min-h-screen flex items-center" style={{
-      backgroundColor: '#5a0202'
-    }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in">
-              <h1 className="text-4xl md:text-7xl font-bold mb-6 metallic-gold-bright font-cinzel leading-tight animate-slide-in-left">“Elevate Every Occasion with Aaroham" </h1>
-              <p className="text-xl md:text-2xl mb-8 metallic-gold-subtle font-cormorant leading-relaxed animate-slide-in-left" style={{
-              animationDelay: '0.2s'
-            }}>“India’s first AI-powered event planning platform blending tradition
-with technology.”</p>
-              <div className="flex flex-col sm:flex-row gap-4 animate-slide-in-left" style={{
-              animationDelay: '0.4s'
-            }}>
-                <Link to="/booking">
-                  <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
-                    Start Planning <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link to="/services">
-                  <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
-                    Explore Services
-                  </Button>
-                </Link>
-              </div>
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-maroon-900 via-maroon-800 to-rose-900 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-center px-4 py-20">
+          <div className="animate-fade-in">
+            <h1 className="text-5xl md:text-7xl font-cinzel font-bold mb-6 metallic-gold leading-tight">
+              Your Dream Wedding
+              <span className="block text-gold-300">Awaits</span>
+            </h1>
+            <p className="text-xl md:text-2xl font-cormorant mb-8 text-gold-100 max-w-2xl mx-auto leading-relaxed">
+              Experience the magic of perfect celebrations with our premium wedding planning services
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+              <Button 
+                onClick={() => setIsBookingFlowOpen(true)}
+                size="lg" 
+                className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold text-lg px-8 py-4 rounded-full shadow-2xl hover-scale"
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Plan Your Wedding
+              </Button>
+              
+              <Button 
+                onClick={() => setIsAIChatOpen(true)}
+                variant="outline" 
+                size="lg" 
+                className="border-2 border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold text-lg px-8 py-4 rounded-full shadow-2xl hover-scale"
+              >
+                <MessageCircle className="mr-2 h-5 w-5" />
+                Chat with AI Assistant
+              </Button>
             </div>
-            <div className="relative animate-slide-in-right">
-              <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Elegant Event Setup" className="rounded-lg shadow-2xl border-2 border-gold-400 hover-lift interactive-element" />
-              <div className="absolute -bottom-4 -right-4 bg-gold-500 text-maroon-900 p-4 rounded-lg font-cinzel font-bold animate-bounce-in hover-glow">
-                <Trophy className="h-6 w-6 mb-2 animate-float" />
-                Award Winning
+
+            <div className="flex items-center justify-center gap-6 text-gold-200">
+              <div className="flex items-center gap-2">
+                <Star className="h-5 w-5 text-gold-400 fill-current" />
+                <span>500+ Happy Couples</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Heart className="h-5 w-5 text-rose-400 fill-current" />
+                <span>Premium Quality</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-blue-400" />
+                <span>Expert Team</span>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 animate-float">
+          <Heart className="h-12 w-12 text-rose-300 opacity-60" />
+        </div>
+        <div className="absolute bottom-32 right-16 animate-float" style={{ animationDelay: '1s' }}>
+          <Sparkles className="h-10 w-10 text-gold-300 opacity-60" />
+        </div>
       </section>
 
-      {/* Featured Services */}
-      <section className="py-20 px-4" style={{
-      backgroundColor: '#5a0202'
-    }}>
-        <div className="max-w-7xl mx-auto">
+      {/* Services Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright font-cinzel">
-              Our Royal Services
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold text-maroon-900 mb-4">
+              Our Premium Services
             </h2>
-            <p className="text-xl metallic-gold-subtle font-cormorant max-w-3xl mx-auto">
-              From intimate gatherings to grand celebrations, we offer comprehensive event solutions
+            <p className="text-xl text-gray-600 font-cormorant max-w-2xl mx-auto">
+              From intimate gatherings to grand celebrations, we create unforgettable experiences
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredServices.map((service, index) => <Card key={index} className="bg-maroon-800 border-gold-600 hover:border-gold-400 hover:shadow-lg hover:shadow-gold-400/20 transition-all overflow-hidden hover-lift interactive-element animate-scale-in" style={{
-            animationDelay: `${index * 0.1}s`
-          }}>
-                <div className="aspect-square bg-gray-200 overflow-hidden">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                </div>
-                <CardHeader className="text-center">
-                  <service.icon className="h-12 w-12 text-gold-400 mx-auto mb-4 animate-float" />
-                  <CardTitle className="text-xl metallic-gold font-cinzel">{service.title}</CardTitle>
-                  <CardDescription className="metallic-gold-subtle font-cormorant">
-                    {service.description}
-                  </CardDescription>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover-scale border-0 shadow-lg">
+                <CardHeader className="text-center pb-4">
+                  <div className="text-6xl mb-4">{service.icon}</div>
+                  <CardTitle className="text-xl font-cinzel text-maroon-900">{service.title}</CardTitle>
                 </CardHeader>
-              </Card>)}
-          </div>
-          
-          <div className="text-center mt-12 animate-fade-in" style={{
-          animationDelay: '0.6s'
-        }}>
-            <Link to="/services">
-              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold hover-scale interactive-element">
-                View All Services <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+                <CardContent className="text-center">
+                  <p className="text-gray-600 mb-4 font-cormorant leading-relaxed">{service.description}</p>
+                  <Badge variant="secondary" className="bg-gold-100 text-gold-800 font-semibold">
+                    {service.price}
+                  </Badge>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 px-4" style={{
-      backgroundColor: '#5a0202'
-    }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="animate-bounce-in" style={{
-            animationDelay: '0.1s'
-          }}>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">500+</div>
-              <div className="metallic-gold-subtle font-cormorant text-lg">Events Completed</div>
-            </div>
-            <div className="animate-bounce-in" style={{
-            animationDelay: '0.2s'
-          }}>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">50+</div>
-              <div className="metallic-gold-subtle font-cormorant text-lg">Expert Vendors</div>
-            </div>
-            <div className="animate-bounce-in" style={{
-            animationDelay: '0.3s'
-          }}>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">25+</div>
-              <div className="metallic-gold-subtle font-cormorant text-lg">Cities Covered</div>
-            </div>
-            <div className="animate-bounce-in" style={{
-            animationDelay: '0.4s'
-          }}>
-              <div className="text-4xl md:text-5xl font-bold metallic-gold-bright font-cinzel mb-2 hover-scale">4.9</div>
-              <div className="metallic-gold-subtle font-cormorant text-lg">Average Rating</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 px-4" style={{
-      backgroundColor: '#5a0202'
-    }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 metallic-gold-bright font-cinzel">
-              What Our Clients Say
+      {/* Packages Section */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold text-maroon-900 mb-4">
+              Wedding Packages
             </h2>
+            <p className="text-xl text-gray-600 font-cormorant max-w-2xl mx-auto">
+              Choose the perfect package for your special day
+            </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => <Card key={index} className="bg-maroon-800 border-gold-600 hover-lift interactive-element animate-slide-in-right" style={{
-            animationDelay: `${index * 0.2}s`
-          }}>
+            {packages.map((pkg, index) => (
+              <Card key={index} className={`relative overflow-hidden transition-all duration-300 hover-scale ${
+                pkg.popular ? 'ring-2 ring-gold-400 shadow-2xl scale-105' : 'shadow-lg'
+              }`}>
+                {pkg.popular && (
+                  <div className="absolute top-0 right-0 bg-gold-500 text-maroon-900 px-3 py-1 text-sm font-semibold">
+                    Most Popular
+                  </div>
+                )}
+                <CardHeader className="text-center bg-gradient-to-b from-maroon-900 to-maroon-800 text-white">
+                  <CardTitle className="text-2xl font-cinzel">{pkg.name}</CardTitle>
+                  <div className="text-3xl font-bold text-gold-400">{pkg.price}</div>
+                </CardHeader>
                 <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full border-2 border-gold-400 mr-4 hover-scale" />
+                  <ul className="space-y-3">
+                    {pkg.features.map((feature, fIndex) => (
+                      <li key={fIndex} className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
+                        <span className="font-cormorant">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full mt-6 bg-maroon-900 hover:bg-maroon-800 font-cormorant">
+                    Choose Package
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-maroon-900 text-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-4 metallic-gold">
+              Happy Couples
+            </h2>
+            <p className="text-xl text-gold-200 font-cormorant max-w-2xl mx-auto">
+              Real experiences from our beautiful weddings
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white/10 backdrop-blur-sm border-gold-400/20 text-white hover-scale">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-gold-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="font-cormorant text-lg mb-4 leading-relaxed">"{testimonial.text}"</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gold-500 rounded-full flex items-center justify-center">
+                      <Heart className="h-6 w-6 text-maroon-900" />
+                    </div>
                     <div>
-                      <h4 className="font-semibold metallic-gold font-cormorant">{testimonial.name}</h4>
-                      <p className="text-sm metallic-gold-subtle font-cormorant">{testimonial.event}</p>
+                      <h4 className="font-semibold">{testimonial.name}</h4>
+                      <p className="text-gold-200 text-sm">{testimonial.event}</p>
                     </div>
                   </div>
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400 animate-float" style={{
-                  animationDelay: `${i * 0.1}s`
-                }} />)}
-                  </div>
-                  <p className="metallic-gold-subtle font-cormorant italic">"{testimonial.text}"</p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4" style={{
-      backgroundColor: '#5a0202'
-    }}>
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 metallic-gold-bright font-cinzel animate-slide-in-left">
-            Ready to Create Your Royal Event?
+      <section className="py-20 bg-gradient-to-r from-gold-500 to-gold-600 text-maroon-900">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <h2 className="text-4xl md:text-5xl font-cinzel font-bold mb-6">
+            Ready to Plan Your Dream Wedding?
           </h2>
-          <p className="text-xl mb-8 metallic-gold-subtle font-cormorant animate-slide-in-right">
-            Join thousands of satisfied customers who trusted us with their special moments
+          <p className="text-xl font-cormorant mb-8 opacity-90">
+            Let our expert team create the perfect celebration for your special day
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-bounce-in" style={{
-          animationDelay: '0.4s'
-        }}>
-            <Link to="/booking">
-              <Button size="lg" className="bg-gold-500 hover:bg-gold-600 text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
-                Book Your Event <Calendar className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button size="lg" variant="outline" className="border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900 font-cormorant font-semibold px-8 py-6 text-lg hover-scale interactive-element">
-                Get Free Quote
-              </Button>
-            </Link>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              onClick={() => setIsBookingFlowOpen(true)}
+              size="lg" 
+              className="bg-maroon-900 hover:bg-maroon-800 text-gold-400 font-cormorant font-semibold text-lg px-8 py-4 rounded-full shadow-2xl hover-scale"
+            >
+              <Calendar className="mr-2 h-5 w-5" />
+              Start Planning Now
+            </Button>
+            
+            <div className="flex items-center gap-4 text-maroon-800">
+              <div className="flex items-center gap-2">
+                <Phone className="h-5 w-5" />
+                <span className="font-semibold">+91 9876543210</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="h-5 w-5" />
+                <span className="font-semibold">hello@aaroham.com</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>;
+
+      {/* AI Chat Component */}
+      <AIChat isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
+
+      {/* Advanced Booking Flow */}
+      <AdvancedBookingFlow isOpen={isBookingFlowOpen} onClose={() => setIsBookingFlowOpen(false)} />
+
+      {/* Floating Action Buttons */}
+      <div className="fixed bottom-6 right-6 z-40 space-y-3">
+        <Button
+          onClick={() => setIsAIChatOpen(true)}
+          className="bg-maroon-900 hover:bg-maroon-800 text-gold-400 rounded-full p-4 shadow-2xl hover-scale animate-pulse"
+          size="lg"
+        >
+          <MessageCircle className="h-6 w-6" />
+        </Button>
+      </div>
+    </div>
+  );
 };
+
 export default Index;
