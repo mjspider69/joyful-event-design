@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, MessageCircle, DollarSign, Star, Settings, Bell, Users, TrendingUp } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface VendorDashboardProps {
   user?: any;
@@ -17,13 +18,13 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
   const [bookings, setBookings] = useState<any[]>([]);
   const [earnings, setEarnings] = useState(0);
   const [reviews, setReviews] = useState<any[]>([]);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (user) {
       fetchProfile();
       fetchBookings();
       fetchEarnings();
-      fetchReviews();
     }
   }, [user]);
 
@@ -49,20 +50,11 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
     const { data } = await supabase
       .from('payments')
       .select('amount')
-      .eq('vendor_id', user.id)
+      .eq('customer_id', user.id)
       .eq('payment_status', 'completed');
     
     const total = data?.reduce((sum, payment) => sum + Number(payment.amount), 0) || 0;
     setEarnings(total);
-  };
-
-  const fetchReviews = async () => {
-    const { data } = await supabase
-      .from('vendor_reviews')
-      .select('*')
-      .eq('vendor_id', profile?.id)
-      .order('created_at', { ascending: false });
-    setReviews(data || []);
   };
 
   const getStatusColor = (status: string) => {
@@ -72,6 +64,34 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
       case 'completed': return 'bg-blue-100 text-blue-800';
       case 'cancelled': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const handleProfileSave = async () => {
+    if (!profile) return;
+    
+    const { error } = await supabase
+      .from('vendors')
+      .update({
+        business_name: profile.business_name,
+        category: profile.category,
+        description: profile.description,
+        location: profile.location,
+        price_range: profile.price_range
+      })
+      .eq('id', profile.id);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update profile",
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: "Profile updated successfully"
+      });
     }
   };
 
@@ -199,7 +219,7 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
                           </div>
                           <div className="flex justify-between items-center">
                             <span className="text-lg font-bold text-maroon-900">
-                              ₹{booking.total_amount?.toLocaleString()}
+                              ₹{booking.total_amount?.toLocaleString() || 'TBD'}
                             </span>
                             <div className="space-x-2">
                               <Button variant="outline" size="sm">
@@ -263,37 +283,10 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {reviews.length === 0 ? (
-                  <div className="text-center py-8">
-                    <Star className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600">No reviews yet</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {reviews.map((review) => (
-                      <Card key={review.id}>
-                        <CardContent className="p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="flex">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`h-4 w-4 ${
-                                    i < review.rating ? 'text-yellow-500 fill-current' : 'text-gray-300'
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-sm text-gray-500">
-                              {new Date(review.created_at).toLocaleDateString()}
-                            </span>
-                          </div>
-                          <p className="text-gray-700">{review.review_text}</p>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+                <div className="text-center py-8">
+                  <Star className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-600">No reviews yet</p>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
@@ -312,7 +305,8 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">Business Name</label>
                     <input 
                       type="text" 
-                      defaultValue={profile?.business_name} 
+                      value={profile?.business_name || ''} 
+                      onChange={(e) => setProfile({...profile, business_name: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
@@ -320,14 +314,16 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">Category</label>
                     <input 
                       type="text" 
-                      defaultValue={profile?.category} 
+                      value={profile?.category || ''} 
+                      onChange={(e) => setProfile({...profile, category: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium mb-2">Description</label>
                     <textarea 
-                      defaultValue={profile?.description} 
+                      value={profile?.description || ''} 
+                      onChange={(e) => setProfile({...profile, description: e.target.value})}
                       className="w-full p-2 border rounded-md h-24"
                     />
                   </div>
@@ -335,7 +331,8 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">Location</label>
                     <input 
                       type="text" 
-                      defaultValue={profile?.location} 
+                      value={profile?.location || ''} 
+                      onChange={(e) => setProfile({...profile, location: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
@@ -343,12 +340,13 @@ const VendorDashboard: React.FC<VendorDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">Price Range</label>
                     <input 
                       type="text" 
-                      defaultValue={profile?.price_range} 
+                      value={profile?.price_range || ''} 
+                      onChange={(e) => setProfile({...profile, price_range: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
                 </div>
-                <Button className="bg-maroon-900 hover:bg-maroon-800">
+                <Button onClick={handleProfileSave} className="bg-maroon-900 hover:bg-maroon-800">
                   Save Changes
                 </Button>
               </CardContent>

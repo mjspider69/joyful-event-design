@@ -18,7 +18,6 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
   const [bookings, setBookings] = useState<any[]>([]);
   const [quotations, setQuotations] = useState<any[]>([]);
   const [savedVendors, setSavedVendors] = useState<any[]>([]);
-  const [notifications, setNotifications] = useState<any[]>([]);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -26,7 +25,6 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
       fetchProfile();
       fetchBookings();
       fetchQuotations();
-      fetchNotifications();
     }
   }, [user]);
 
@@ -57,22 +55,38 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
     setQuotations(data || []);
   };
 
-  const fetchNotifications = async () => {
-    const { data } = await supabase
-      .from('notifications')
-      .select('*')
-      .eq('user_id', user.id)
-      .order('created_at', { ascending: false })
-      .limit(5);
-    setNotifications(data || []);
-  };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'confirmed': return 'bg-green-100 text-green-800';
       case 'pending': return 'bg-yellow-100 text-yellow-800';
       case 'cancelled': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const handleProfileSave = async () => {
+    if (!profile) return;
+    
+    const { error } = await supabase
+      .from('profiles')
+      .update({
+        full_name: profile.full_name,
+        phone: profile.phone,
+        city: profile.city
+      })
+      .eq('id', user.id);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update profile",
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: "Profile updated successfully"
+      });
     }
   };
 
@@ -138,7 +152,7 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
               <div className="flex items-center gap-3">
                 <MessageCircle className="h-8 w-8 text-green-600" />
                 <div>
-                  <p className="text-2xl font-bold">3</p>
+                  <p className="text-2xl font-bold">0</p>
                   <p className="text-sm text-gray-600">Active Chats</p>
                 </div>
               </div>
@@ -196,7 +210,7 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
                           </div>
                           <div className="flex justify-between items-center mt-4">
                             <span className="text-lg font-bold text-maroon-900">
-                              ₹{booking.total_amount?.toLocaleString()}
+                              ₹{booking.total_amount?.toLocaleString() || 'TBD'}
                             </span>
                             <Button variant="outline" size="sm">
                               View Details
@@ -242,7 +256,7 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
                           <p className="text-sm text-gray-600 mb-2">{quote.requirements}</p>
                           <div className="flex justify-between items-center">
                             <span className="text-lg font-bold text-maroon-900">
-                              ₹{quote.total_amount?.toLocaleString()}
+                              ₹{quote.total_amount?.toLocaleString() || 'TBD'}
                             </span>
                             <Button variant="outline" size="sm">
                               View Quote
@@ -311,7 +325,8 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">Full Name</label>
                     <input 
                       type="text" 
-                      defaultValue={profile?.full_name} 
+                      value={profile?.full_name || ''} 
+                      onChange={(e) => setProfile({...profile, full_name: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
@@ -319,7 +334,8 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">Phone</label>
                     <input 
                       type="tel" 
-                      defaultValue={profile?.phone} 
+                      value={profile?.phone || ''} 
+                      onChange={(e) => setProfile({...profile, phone: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
@@ -327,12 +343,13 @@ const CustomerDashboard: React.FC<CustomerDashboardProps> = ({ user }) => {
                     <label className="block text-sm font-medium mb-2">City</label>
                     <input 
                       type="text" 
-                      defaultValue={profile?.city} 
+                      value={profile?.city || ''} 
+                      onChange={(e) => setProfile({...profile, city: e.target.value})}
                       className="w-full p-2 border rounded-md"
                     />
                   </div>
                 </div>
-                <Button className="bg-maroon-900 hover:bg-maroon-800">
+                <Button onClick={handleProfileSave} className="bg-maroon-900 hover:bg-maroon-800">
                   Save Changes
                 </Button>
               </CardContent>

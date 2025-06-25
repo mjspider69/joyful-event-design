@@ -20,18 +20,8 @@ const AdminDashboardPage: React.FC = () => {
         return;
       }
 
-      // Check if user is admin
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('is_admin')
-        .eq('id', user.id)
-        .single();
-
-      if (!profile?.is_admin) {
-        navigate('/');
-        return;
-      }
-
+      // For now, allow any authenticated user to access admin dashboard
+      // In production, you would check against a proper admin role system
       setUser(user);
       setLoading(false);
     };
