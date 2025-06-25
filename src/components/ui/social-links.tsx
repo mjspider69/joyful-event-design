@@ -25,7 +25,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-gold-400 hover:text-gold-300 hover:bg-gold-400/10"
+        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
         onClick={() => window.open('https://www.instagram.com/aaroham_?igsh=OXFjd3V2eHdlOXhj', '_blank')}
       >
         <Instagram className={iconSize} />
@@ -35,7 +35,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-gold-400 hover:text-gold-300 hover:bg-gold-400/10"
+        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
         onClick={() => window.open('https://www.linkedin.com/groups/14719662/', '_blank')}
       >
         <Linkedin className={iconSize} />
@@ -45,7 +45,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-gold-400 hover:text-gold-300 hover:bg-gold-400/10"
+        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
         onClick={() => window.open('mailto:aaroham.net@gmail.com')}
       >
         <Mail className={iconSize} />
@@ -55,7 +55,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-gold-400 hover:text-gold-300 hover:bg-gold-400/10"
+        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
         onClick={() => window.open('tel:+919176988931')}
       >
         <Phone className={iconSize} />

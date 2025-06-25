@@ -13,7 +13,7 @@ const ModernServices = () => {
       description: "Capture every precious moment with our award-winning photographers and cinematographers",
       price: "Starting from ₹25,000",
       features: ["4K Video", "Drone Shots", "Same Day Edits", "Online Gallery"],
-      gradient: "from-blue-500/20 to-purple-500/20"
+      gradient: "from-blue-400/20 to-blue-600/20"
     },
     {
       icon: "🎊",
@@ -21,7 +21,7 @@ const ModernServices = () => {
       description: "Transform your venue into a dreamland with our creative design specialists",
       price: "Starting from ₹35,000",
       features: ["3D Design", "Fresh Flowers", "Lighting Setup", "Theme Coordination"],
-      gradient: "from-pink-500/20 to-rose-500/20"
+      gradient: "from-pink-400/20 to-rose-500/20"
     },
     {
       icon: "🍽️",
@@ -29,7 +29,7 @@ const ModernServices = () => {
       description: "Delight your guests with exquisite multi-cuisine dining experiences",
       price: "Starting from ₹400/plate",
       features: ["Live Counters", "Customizable Menu", "Professional Staff", "Hygiene Certified"],
-      gradient: "from-orange-500/20 to-red-500/20"
+      gradient: "from-orange-400/20 to-red-500/20"
     },
     {
       icon: "🎵",
@@ -37,7 +37,7 @@ const ModernServices = () => {
       description: "Keep the energy high with professional DJs and live entertainment",
       price: "Starting from ₹15,000",
       features: ["Professional DJ", "Sound System", "Lighting Effects", "MC Services"],
-      gradient: "from-green-500/20 to-teal-500/20"
+      gradient: "from-green-400/20 to-teal-500/20"
     },
     {
       icon: "💄",
@@ -45,7 +45,7 @@ const ModernServices = () => {
       description: "Look your absolute best with our professional beauty experts",
       price: "Starting from ₹12,000",
       features: ["Bridal Makeup", "Hair Styling", "Saree Draping", "Trial Session"],
-      gradient: "from-purple-500/20 to-pink-500/20"
+      gradient: "from-purple-400/20 to-pink-500/20"
     },
     {
       icon: "🏰",
@@ -53,7 +53,7 @@ const ModernServices = () => {
       description: "Find and manage the perfect venue for your special celebration",
       price: "Starting from ₹50,000",
       features: ["Venue Booking", "Decoration", "Catering Setup", "Full Management"],
-      gradient: "from-indigo-500/20 to-blue-500/20"
+      gradient: "from-indigo-400/20 to-blue-600/20"
     }
   ];
 
@@ -62,15 +62,15 @@ const ModernServices = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-20 animate-fade-in">
-          <div className="inline-flex items-center gap-2 bg-gold-100 rounded-full px-6 py-2 mb-6">
-            <Star className="h-4 w-4 text-gold-600 fill-current" />
-            <span className="text-gold-800 font-semibold text-sm">Premium Services</span>
+          <div className="inline-flex items-center gap-2 bg-luxury-100 rounded-full px-6 py-2 mb-6">
+            <Star className="h-4 w-4 text-luxury-600 fill-current" />
+            <span className="text-luxury-800 font-semibold text-sm">Premium Services</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-cinzel font-bold text-maroon-900 mb-6">
+          <h2 className="text-4xl md:text-6xl font-cinzel font-bold text-primary-800 mb-6">
             Our Signature Services
           </h2>
-          <p className="text-xl text-gray-600 font-cormorant max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-elegant-600 font-cormorant max-w-3xl mx-auto leading-relaxed">
             From intimate gatherings to grand celebrations, we create unforgettable experiences with attention to every detail
           </p>
         </div>
@@ -86,30 +86,30 @@ const ModernServices = () => {
                 <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                   {service.icon}
                 </div>
-                <CardTitle className="text-xl font-cinzel text-maroon-900 mb-2">
+                <CardTitle className="text-xl font-cinzel text-primary-800 mb-2">
                   {service.title}
                 </CardTitle>
-                <Badge className="bg-gold-100 text-gold-800 font-semibold">
+                <Badge className="bg-luxury-100 text-luxury-800 font-semibold">
                   {service.price}
                 </Badge>
               </CardHeader>
               
               <CardContent className="relative z-10 text-center">
-                <p className="text-gray-600 mb-6 font-cormorant leading-relaxed">
+                <p className="text-elegant-600 mb-6 font-cormorant leading-relaxed">
                   {service.description}
                 </p>
                 
                 {/* Features */}
                 <div className="space-y-2 mb-6">
                   {service.features.map((feature, fIndex) => (
-                    <div key={fIndex} className="flex items-center gap-2 text-sm text-gray-700">
-                      <div className="w-2 h-2 bg-gold-500 rounded-full"></div>
+                    <div key={fIndex} className="flex items-center gap-2 text-sm text-elegant-700">
+                      <div className="w-2 h-2 bg-luxury-500 rounded-full"></div>
                       <span className="font-cormorant">{feature}</span>
                     </div>
                   ))}
                 </div>
                 
-                <Button className="w-full bg-maroon-900 hover:bg-maroon-800 text-gold-100 font-cormorant group-hover:bg-gold-600 group-hover:text-maroon-900 transition-all duration-300">
+                <Button className="w-full bg-primary-700 hover:bg-primary-800 text-white font-cormorant group-hover:bg-luxury-600 group-hover:text-white transition-all duration-300">
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -122,7 +122,7 @@ const ModernServices = () => {
         <div className="text-center mt-16">
           <Button 
             size="lg"
-            className="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-maroon-900 font-cormorant font-bold text-lg px-8 py-4 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
+            className="bg-gradient-to-r from-luxury-500 to-luxury-600 hover:from-luxury-600 hover:to-luxury-700 text-white font-cormorant font-bold text-lg px-8 py-4 rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
           >
             View All Services
             <ArrowRight className="ml-2 h-5 w-5" />
