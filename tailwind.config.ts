@@ -20,108 +20,86 @@ export default {
 		extend: {
 			fontFamily: {
 				'playfair': ['Playfair Display', 'serif'],
-				'cinzel': ['Cinzel', 'serif'],
-				'cormorant': ['Cormorant Garamond', 'serif'],
+				'inter': ['Inter', 'sans-serif'],
+				'poppins': ['Poppins', 'sans-serif'],
 			},
 			colors: {
-				// Modern sophisticated palette
-				primary: {
-					50: '#f0f9ff',
-					100: '#e0f2fe',
-					200: '#bae6fd',
-					300: '#7dd3fc',
-					400: '#38bdf8',
-					500: '#0ea5e9',
-					600: '#0284c7',
-					700: '#0369a1',
-					800: '#075985',
-					900: '#0c4a6e',
-					950: '#082f49',
+				// Fresh modern color palette
+				brand: {
+					50: '#fdf8f6',
+					100: '#f2e8e5',
+					200: '#eaddd7',
+					300: '#e0cec7',
+					400: '#d2bab0',
+					500: '#bfa094',
+					600: '#a18072',
+					700: '#977669',
+					800: '#846358',
+					900: '#43302b',
+					950: '#2a1e1a',
 				},
-				accent: {
-					50: '#fefce8',
-					100: '#fef9c3',
-					200: '#fef08a',
-					300: '#fde047',
-					400: '#facc15',
-					500: '#eab308',
-					600: '#ca8a04',
-					700: '#a16207',
-					800: '#854d0e',
-					900: '#713f12',
-					950: '#422006',
+				coral: {
+					50: '#fef7f0',
+					100: '#fdedd9',
+					200: '#fad7b2',
+					300: '#f6ba81',
+					400: '#f0934e',
+					500: '#eb7527',
+					600: '#dc5a1d',
+					700: '#b7451a',
+					800: '#92381b',
+					900: '#762f1a',
+					950: '#40170b',
 				},
-				luxury: {
-					50: '#f8fafc',
-					100: '#f1f5f9',
-					200: '#e2e8f0',
-					300: '#cbd5e1',
-					400: '#94a3b8',
-					500: '#64748b',
-					600: '#475569',
-					700: '#334155',
-					800: '#1e293b',
-					900: '#0f172a',
-					950: '#020617',
+				sage: {
+					50: '#f6f7f6',
+					100: '#e3e7e3',
+					200: '#c7d0c7',
+					300: '#a1b3a1',
+					400: '#749074',
+					500: '#5c775c',
+					600: '#456045',
+					700: '#384c38',
+					800: '#2e3e2e',
+					900: '#273327',
+					950: '#141a14',
 				},
-				elegant: {
-					50: '#fdf4ff',
-					100: '#fae8ff',
-					200: '#f5d0fe',
-					300: '#f0abfc',
-					400: '#e879f9',
-					500: '#d946ef',
-					600: '#c026d3',
-					700: '#a21caf',
-					800: '#86198f',
-					900: '#701a75',
-					950: '#4a044e',
+				cream: {
+					50: '#fefcf9',
+					100: '#fdf9f0',
+					200: '#faf2df',
+					300: '#f6e8c3',
+					400: '#f0d89e',
+					500: '#e9c46a',
+					600: '#e2b055',
+					700: '#d69e42',
+					800: '#c88a37',
+					900: '#a06f2e',
+					950: '#5a3c18',
 				},
-				success: {
-					50: '#f0fdf4',
-					100: '#dcfce7',
-					200: '#bbf7d0',
-					300: '#86efac',
-					400: '#4ade80',
-					500: '#22c55e',
-					600: '#16a34a',
-					700: '#15803d',
-					800: '#166534',
-					900: '#14532d',
-					950: '#052e16',
+				charcoal: {
+					50: '#f6f6f6',
+					100: '#e7e7e7',
+					200: '#d1d1d1',
+					300: '#b0b0b0',
+					400: '#888888',
+					500: '#6d6d6d',
+					600: '#5d5d5d',
+					700: '#4f4f4f',
+					800: '#454545',
+					900: '#3d3d3d',
+					950: '#262626',
 				},
-				// Keep compatibility colors
-				maroon: {
-					50: '#fdf2f3',
-					100: '#fce7e9',
-					200: '#f9d2d7',
-					300: '#f4adb7',
-					400: '#ec7d8f',
-					500: '#e0526d',
-					600: '#cc2f53',
-					700: '#ac2345',
-					800: '#8b1f3e',
-					900: '#722f37',
-					950: '#3f1419',
-				},
-				gold: {
-					50: '#fefce8',
-					100: '#fef9c3',
-					200: '#fef08a',
-					300: '#fde047',
-					400: '#facc15',
-					500: '#eab308',
-					600: '#ca8a04',
-					700: '#a16207',
-					800: '#854d0e',
-					900: '#713f12',
-					950: '#422006',
-				},
+				// Keep shadcn compatibility
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				primary: {
+					DEFAULT: 'hsl(var(--primary))',
+					foreground: 'hsl(var(--primary-foreground))'
+				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -133,6 +111,10 @@ export default {
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
+				},
+				accent: {
+					DEFAULT: 'hsl(var(--accent))',
+					foreground: 'hsl(var(--accent-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -175,45 +157,43 @@ export default {
 						height: '0'
 					}
 				},
-				shimmer: {
+				'fade-in': {
 					'0%': {
-						backgroundPosition: '0% 50%'
-					},
-					'50%': {
-						backgroundPosition: '100% 50%'
+						opacity: '0',
+						transform: 'translateY(20px)'
 					},
 					'100%': {
-						backgroundPosition: '0% 50%'
+						opacity: '1',
+						transform: 'translateY(0)'
 					}
 				},
-				glitter: {
+				'slide-up': {
 					'0%': {
-						transform: 'translateX(0) translateY(0)',
-						opacity: '1'
-					},
-					'25%': {
-						transform: 'translateX(5px) translateY(-5px)',
-						opacity: '0.8'
-					},
-					'50%': {
-						transform: 'translateX(-3px) translateY(3px)',
-						opacity: '1'
-					},
-					'75%': {
-						transform: 'translateX(3px) translateY(-2px)',
-						opacity: '0.9'
+						opacity: '0',
+						transform: 'translateY(30px)'
 					},
 					'100%': {
-						transform: 'translateX(0) translateY(0)',
-						opacity: '1'
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'scale-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
 					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				shimmer: 'shimmer 3s ease-in-out infinite',
-				glitter: 'glitter 4s linear infinite'
+				'fade-in': 'fade-in 0.6s ease-out',
+				'slide-up': 'slide-up 0.8s ease-out',
+				'scale-in': 'scale-in 0.5s ease-out'
 			}
 		}
 	},

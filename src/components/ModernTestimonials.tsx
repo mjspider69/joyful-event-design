@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Star, Quote, Heart } from "lucide-react";
+import { Star, Quote, Heart, Trophy } from "lucide-react";
 
 const ModernTestimonials = () => {
   const testimonials = [
@@ -32,27 +32,27 @@ const ModernTestimonials = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-br from-primary-50 to-elegant-50 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-br from-sage-50 to-cream-50 relative overflow-hidden">
       {/* Background pattern */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235c775c' fill-opacity='0.4'%3E%3Cpath d='M30 30c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }}
       ></div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-20 animate-fade-in">
-          <div className="inline-flex items-center gap-2 bg-elegant-500/20 border border-elegant-300/30 rounded-full px-6 py-2 mb-6">
-            <Heart className="h-4 w-4 text-elegant-600 fill-current" />
-            <span className="text-elegant-800 font-semibold text-sm">Love Stories</span>
+          <div className="inline-flex items-center gap-3 bg-sage-100 border border-sage-200 rounded-full px-8 py-3 mb-8">
+            <Heart className="h-5 w-5 text-sage-600 fill-current" />
+            <span className="text-sage-800 font-bold text-base">Love Stories</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-cinzel font-bold mb-6 metallic-primary">
+          <h2 className="heading-lg mb-8 text-charcoal-900">
             Happy Couples Share
           </h2>
-          <p className="text-xl text-luxury-600 font-cormorant max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-charcoal-700 max-w-3xl mx-auto leading-relaxed">
             Real experiences from beautiful celebrations we've had the honor to plan
           </p>
         </div>
@@ -60,20 +60,22 @@ const ModernTestimonials = () => {
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="group bg-white/90 backdrop-blur-sm border border-primary-200 hover:border-primary-400 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary-400/20">
+            <Card key={index} className="group glass-card hover-lift border-2 border-brand-200">
               <CardContent className="p-8">
                 {/* Quote icon */}
-                <Quote className="h-8 w-8 text-primary-500 mb-6 opacity-60" />
+                <div className="w-12 h-12 bg-coral-100 rounded-full flex items-center justify-center mb-6">
+                  <Quote className="h-6 w-6 text-coral-600" />
+                </div>
                 
                 {/* Rating */}
-                <div className="flex items-center gap-2 mb-6">
+                <div className="flex items-center gap-1 mb-6">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-accent-500 fill-current" />
+                    <Star key={i} className="h-5 w-5 text-cream-500 fill-current" />
                   ))}
                 </div>
                 
                 {/* Testimonial text */}
-                <p className="font-cormorant text-lg text-luxury-700 mb-8 leading-relaxed">
+                <p className="text-lg text-charcoal-700 mb-8 leading-relaxed font-medium">
                   "{testimonial.text}"
                 </p>
                 
@@ -83,14 +85,16 @@ const ModernTestimonials = () => {
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover border-2 border-primary-300 group-hover:border-primary-500 transition-colors"
+                      className="w-16 h-16 rounded-full object-cover border-3 border-white shadow-lg"
                     />
-                    <Heart className="absolute -bottom-1 -right-1 h-6 w-6 text-elegant-400 fill-current bg-white rounded-full p-1" />
+                    <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-coral-500 rounded-full flex items-center justify-center">
+                      <Heart className="h-3 w-3 text-white fill-current" />
+                    </div>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-luxury-700 text-lg">{testimonial.name}</h4>
-                    <p className="text-primary-600 font-cormorant">{testimonial.event}</p>
-                    <p className="text-accent-600 text-sm">{testimonial.location}</p>
+                    <h4 className="font-bold text-charcoal-800 text-lg">{testimonial.name}</h4>
+                    <p className="text-coral-600 font-semibold">{testimonial.event}</p>
+                    <p className="text-sage-600 text-sm font-medium">{testimonial.location}</p>
                   </div>
                 </div>
               </CardContent>
@@ -99,22 +103,30 @@ const ModernTestimonials = () => {
         </div>
 
         {/* Stats section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 text-center">
-          <div className="group">
-            <div className="text-4xl font-bold metallic-primary mb-2 group-hover:scale-110 transition-transform">500+</div>
-            <p className="text-luxury-600 font-cormorant">Happy Couples</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+          <div className="text-center group">
+            <div className="w-20 h-20 bg-white shadow-lg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-3xl font-bold text-coral-600">500+</span>
+            </div>
+            <p className="text-charcoal-700 font-semibold">Happy Couples</p>
           </div>
-          <div className="group">
-            <div className="text-4xl font-bold metallic-primary mb-2 group-hover:scale-110 transition-transform">4.9</div>
-            <p className="text-luxury-600 font-cormorant">Average Rating</p>
+          <div className="text-center group">
+            <div className="w-20 h-20 bg-white shadow-lg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-3xl font-bold text-sage-600">4.9</span>
+            </div>
+            <p className="text-charcoal-700 font-semibold">Average Rating</p>
           </div>
-          <div className="group">
-            <div className="text-4xl font-bold metallic-primary mb-2 group-hover:scale-110 transition-transform">1000+</div>
-            <p className="text-luxury-600 font-cormorant">Events Planned</p>
+          <div className="text-center group">
+            <div className="w-20 h-20 bg-white shadow-lg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-3xl font-bold text-cream-600">1000+</span>
+            </div>
+            <p className="text-charcoal-700 font-semibold">Events Planned</p>
           </div>
-          <div className="group">
-            <div className="text-4xl font-bold metallic-primary mb-2 group-hover:scale-110 transition-transform">50+</div>
-            <p className="text-luxury-600 font-cormorant">Expert Vendors</p>
+          <div className="text-center group">
+            <div className="w-20 h-20 bg-white shadow-lg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <span className="text-3xl font-bold text-coral-600">50+</span>
+            </div>
+            <p className="text-charcoal-700 font-semibold">Expert Vendors</p>
           </div>
         </div>
       </div>

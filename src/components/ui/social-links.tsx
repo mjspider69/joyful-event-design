@@ -25,41 +25,41 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
+        className="text-coral-600 hover:text-white hover:bg-coral-500 backdrop-blur-sm border-2 border-coral-200 hover:border-coral-500 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl"
         onClick={() => window.open('https://www.instagram.com/aaroham_?igsh=OXFjd3V2eHdlOXhj', '_blank')}
       >
         <Instagram className={iconSize} />
-        {showLabels && <span className="ml-2">Instagram</span>}
+        {showLabels && <span className="ml-2 font-semibold">Instagram</span>}
       </Button>
       
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
+        className="text-sage-600 hover:text-white hover:bg-sage-500 backdrop-blur-sm border-2 border-sage-200 hover:border-sage-500 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl"
         onClick={() => window.open('https://www.linkedin.com/groups/14719662/', '_blank')}
       >
         <Linkedin className={iconSize} />
-        {showLabels && <span className="ml-2">LinkedIn</span>}
+        {showLabels && <span className="ml-2 font-semibold">LinkedIn</span>}
       </Button>
       
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
+        className="text-cream-600 hover:text-white hover:bg-cream-500 backdrop-blur-sm border-2 border-cream-200 hover:border-cream-500 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl"
         onClick={() => window.open('mailto:aaroham.net@gmail.com')}
       >
         <Mail className={iconSize} />
-        {showLabels && <span className="ml-2">Email</span>}
+        {showLabels && <span className="ml-2 font-semibold">Email</span>}
       </Button>
       
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
+        className="text-charcoal-600 hover:text-white hover:bg-charcoal-500 backdrop-blur-sm border-2 border-charcoal-200 hover:border-charcoal-500 transition-all duration-300 rounded-xl shadow-lg hover:shadow-xl"
         onClick={() => window.open('tel:+919176988931')}
       >
         <Phone className={iconSize} />
-        {showLabels && <span className="ml-2">Call</span>}
+        {showLabels && <span className="ml-2 font-semibold">Call</span>}
       </Button>
     </div>
   );
