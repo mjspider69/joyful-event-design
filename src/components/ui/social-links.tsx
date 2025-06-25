@@ -25,7 +25,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
+        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
         onClick={() => window.open('https://www.instagram.com/aaroham_?igsh=OXFjd3V2eHdlOXhj', '_blank')}
       >
         <Instagram className={iconSize} />
@@ -35,7 +35,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
+        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
         onClick={() => window.open('https://www.linkedin.com/groups/14719662/', '_blank')}
       >
         <Linkedin className={iconSize} />
@@ -45,7 +45,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
+        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
         onClick={() => window.open('mailto:aaroham.net@gmail.com')}
       >
         <Mail className={iconSize} />
@@ -55,7 +55,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       <Button
         variant="ghost"
         size={buttonSize}
-        className="text-luxury-600 hover:text-luxury-700 hover:bg-luxury-100"
+        className="text-primary-600 hover:text-primary-700 hover:bg-primary-100/50 backdrop-blur-sm border border-primary-200/50 hover:border-primary-300 transition-all duration-300"
         onClick={() => window.open('tel:+919176988931')}
       >
         <Phone className={iconSize} />
