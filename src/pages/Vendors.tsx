@@ -1,201 +1,447 @@
 
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Star, MapPin, Phone, Mail, Search, Filter } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Search, MapPin, Star, Heart, Phone, Mail, Filter, Calendar } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
+import { CulturalBackdrop } from "@/components/CulturalBackdrop";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
-const Vendors = () => {
-  const vendors = [
-    {
-      name: "Elegant Moments Photography",
-      category: "Photography",
-      location: "Mumbai, Maharashtra",
-      rating: 4.9,
-      reviews: 125,
-      price: "₹50,000 - ₹1,50,000",
-      image: "https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      name: "Royal Palace Banquet",
-      category: "Venue",
-      location: "Delhi, Delhi",
-      rating: 4.8,
-      reviews: 89,
-      price: "₹2,00,000 - ₹5,00,000",
-      image: "https://images.unsplash.com/photo-1519167758481-83f29c8ea79d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      name: "Gourmet Catering Co.",
-      category: "Catering",
-      location: "Bangalore, Karnataka",
-      rating: 4.7,
-      reviews: 156,
-      price: "₹800 - ₹1,500 per plate",
-      image: "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      name: "Glamour Decoration Studio",
-      category: "Decoration",
-      location: "Pune, Maharashtra",
-      rating: 4.9,
-      reviews: 78,
-      price: "₹25,000 - ₹75,000",
-      image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      name: "Dream Event Planners",
-      category: "Event Planner",
-      location: "Jaipur, Rajasthan",
-      rating: 4.8,
-      reviews: 92,
-      price: "₹1,00,000 - ₹3,00,000",
-      image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    },
-    {
-      name: "Melody Music Band",
-      category: "Entertainment",
-      location: "Chennai, Tamil Nadu",
-      rating: 4.6,
-      reviews: 67,
-      price: "₹30,000 - ₹80,000",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-    }
+const Vendors: React.FC = () => {
+  const [vendors, setVendors] = useState<any[]>([]);
+  const [filteredVendors, setFilteredVendors] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedLocation, setSelectedLocation] = useState('all');
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const [selectedVendor, setSelectedVendor] = useState<any>(null);
+  const { user, profile } = useAuth();
+  const { toast } = useToast();
+
+  const categories = [
+    'all', 'Photographers', 'Decorators', 'Caterers', 'Musicians', 'Priests', 'Makeup Artists', 'Venues', 'Transport'
   ];
 
-  return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+  const locations = [
+    'all', 'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Ahmedabad', 'Jaipur', 'Kochi'
+  ];
+
+  useEffect(() => {
+    fetchVendors();
+  }, []);
+
+  useEffect(() => {
+    filterVendors();
+  }, [vendors, searchQuery, selectedCategory, selectedLocation]);
+
+  const fetchVendors = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('vendors')
+        .select('*')
+        .eq('is_approved', true)
+        .eq('is_online', true)
+        .order('rating', { ascending: false });
+
+      if (error) throw error;
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4 luxury-gradient relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }}
-        ></div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center text-white font-cinzel">
-            Find Event Vendors
-          </h1>
-          <p className="text-xl text-center mb-8 max-w-3xl mx-auto text-gray-100 font-cormorant">
-            Discover trusted event vendors in your city. Compare prices, read reviews, 
-            and book the perfect professionals for your special occasion.
+      setVendors(data || []);
+      setFilteredVendors(data || []);
+    } catch (error) {
+      console.error('Error fetching vendors:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterVendors = () => {
+    let filtered = [...vendors];
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(vendor =>
+        vendor.business_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        vendor.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        vendor.location?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filter by category
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(vendor => 
+        vendor.category.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // Filter by location
+    if (selectedLocation !== 'all') {
+      filtered = filtered.filter(vendor => 
+        vendor.location?.toLowerCase().includes(selectedLocation.toLowerCase())
+      );
+    }
+
+    setFilteredVendors(filtered);
+  };
+
+  const handleVendorClick = async (vendor: any) => {
+    if (!user) {
+      setShowLoginDialog(true);
+      return;
+    }
+
+    // Check if user has used their first call
+    if (!profile?.first_call_used) {
+      // Mark first call as used
+      await supabase
+        .from('profiles')
+        .update({ first_call_used: true })
+        .eq('id', user.id);
+    }
+
+    setSelectedVendor(vendor);
+  };
+
+  const saveVendor = async (vendorId: string) => {
+    if (!user) {
+      setShowLoginDialog(true);
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('saved_vendors')
+        .insert([
+          {
+            customer_id: user.id,
+            vendor_id: vendorId
+          }
+        ]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: "Vendor saved to your favorites"
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save vendor",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const initiateCall = (vendor: any) => {
+    if (profile?.first_call_used) {
+      toast({
+        title: "First Call Used",
+        description: "You've used your free call. Please chat or book to continue.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (vendor.contact_phone) {
+      window.open(`tel:${vendor.contact_phone}`, '_self');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-cream-50 pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-coral-500 mx-auto mb-4"></div>
+          <p className="text-charcoal-600">Loading vendors...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-cream-50 pt-20">
+      {/* Cultural Backdrop Header */}
+      <CulturalBackdrop 
+        location={selectedLocation === 'all' ? 'India' : selectedLocation}
+        className="h-64 flex items-center justify-center"
+      >
+        <div className="text-center text-white z-10 relative">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Find Your Perfect Vendor</h1>
+          <p className="text-xl md:text-2xl">
+            Discover talented professionals for your special day
           </p>
-          
-          {/* Search Bar */}
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-4 bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl border border-white/20">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3 h-5 w-5 text-primary-500" />
-                <Input 
-                  placeholder="Search vendors (e.g., photographers, venues...)"
-                  className="pl-10 border-primary-200 focus:border-primary-500 focus:ring-primary-500"
+        </div>
+      </CulturalBackdrop>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Filters */}
+        <Card className="mb-8 bg-white shadow-lg">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-charcoal-400" />
+                <Input
+                  placeholder="Search vendors..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
                 />
               </div>
-              <div className="flex-1 relative">
-                <MapPin className="absolute left-3 top-3 h-5 w-5 text-primary-500" />
-                <Input 
-                  placeholder="Location (city, area)"
-                  className="pl-10 border-primary-200 focus:border-primary-500 focus:ring-primary-500"
-                />
-              </div>
-              <Button className="bg-primary-600 hover:bg-primary-700 text-white font-cormorant font-semibold px-8 shadow-lg">
-                Search
+              
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map(category => (
+                    <SelectItem key={category} value={category}>
+                      {category === 'all' ? 'All Categories' : category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Location" />
+                </SelectTrigger>
+                <SelectContent>
+                  {locations.map(location => (
+                    <SelectItem key={location} value={location}>
+                      {location === 'all' ? 'All Locations' : location}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Button className="bg-coral-500 hover:bg-coral-600 w-full">
+                <Filter className="h-4 w-4 mr-2" />
+                Apply Filters
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
+          </CardContent>
+        </Card>
 
-      {/* Filters */}
-      <section className="py-8 px-4 border-b border-primary-200 bg-white/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap items-center gap-4">
-            <Button variant="outline" className="gap-2 border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">
-              <Filter className="h-4 w-4" />
-              All Categories
-            </Button>
-            <Button variant="outline" className="border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">Photography</Button>
-            <Button variant="outline" className="border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">Venues</Button>
-            <Button variant="outline" className="border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">Catering</Button>
-            <Button variant="outline" className="border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">Decoration</Button>
-            <Button variant="outline" className="border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">Planners</Button>
-            <Button variant="outline" className="border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">Entertainment</Button>
-          </div>
+        {/* Results Count */}
+        <div className="mb-6">
+          <p className="text-charcoal-600">
+            Showing {filteredVendors.length} vendor{filteredVendors.length !== 1 ? 's' : ''} 
+            {selectedLocation !== 'all' && ` in ${selectedLocation}`}
+            {selectedCategory !== 'all' && ` for ${selectedCategory}`}
+          </p>
         </div>
-      </section>
 
-      {/* Vendors Grid */}
-      <section className="py-12 px-4 bg-gradient-to-b from-white/80 to-primary-50/50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {vendors.map((vendor, index) => (
-              <Card key={index} className="bg-white/95 backdrop-blur-sm border border-primary-200 hover:border-primary-400 hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-500 transform hover:-translate-y-2 overflow-hidden">
-                <div className="aspect-video bg-gray-200 overflow-hidden relative">
-                  <img 
-                    src={vendor.image} 
-                    alt={vendor.name}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <CardHeader className="pb-3">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-lg text-luxury-800 font-cinzel hover:text-primary-600 transition-colors">{vendor.name}</CardTitle>
-                      <p className="text-sm text-primary-600 font-medium font-cormorant bg-primary-100 px-2 py-1 rounded-full inline-block mt-1">{vendor.category}</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="flex items-center gap-1 bg-accent-100 px-2 py-1 rounded-full">
-                        <Star className="h-4 w-4 fill-accent-500 text-accent-500" />
-                        <span className="font-medium text-accent-700 text-sm">{vendor.rating}</span>
+        {/* Vendors Grid */}
+        {filteredVendors.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="text-xl font-bold text-charcoal-900 mb-2">No vendors found</h3>
+            <p className="text-charcoal-600">Try adjusting your search criteria</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredVendors.map((vendor) => (
+              <Card 
+                key={vendor.id} 
+                className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1"
+                onClick={() => handleVendorClick(vendor)}
+              >
+                <CardContent className="p-0">
+                  {/* Vendor Image */}
+                  <div className="relative h-48 bg-gradient-to-r from-coral-100 to-sage-100">
+                    {vendor.portfolio_images && vendor.portfolio_images.length > 0 ? (
+                      <img 
+                        src={vendor.portfolio_images[0]} 
+                        alt={vendor.business_name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-4xl">📸</span>
                       </div>
-                      <p className="text-xs text-luxury-600 mt-1">({vendor.reviews} reviews)</p>
+                    )}
+                    <div className="absolute top-3 right-3">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="bg-white/90 hover:bg-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          saveVendor(vendor.id);
+                        }}
+                      >
+                        <Heart className="h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-sm text-luxury-600 font-cormorant">
-                      <MapPin className="h-4 w-4 text-primary-500" />
-                      {vendor.location}
+
+                  {/* Vendor Info */}
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <h3 className="font-bold text-lg text-charcoal-900">{vendor.business_name}</h3>
+                        <p className="text-sm text-charcoal-600">{vendor.category}</p>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                        <span className="text-sm font-medium">{vendor.rating || 0}</span>
+                      </div>
                     </div>
-                    <div className="text-sm font-semibold text-success-600 bg-success-100 px-3 py-2 rounded-lg font-cormorant">
-                      {vendor.price}
+
+                    <div className="flex items-center gap-1 mb-2">
+                      <MapPin className="h-4 w-4 text-charcoal-400" />
+                      <span className="text-sm text-charcoal-600">{vendor.location || 'Location not specified'}</span>
                     </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="flex-1 border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">
-                        <Phone className="h-4 w-4 mr-1" />
-                        Call
-                      </Button>
-                      <Button variant="outline" size="sm" className="flex-1 border-primary-300 text-primary-700 hover:bg-primary-100 hover:border-primary-400 font-cormorant">
-                        <Mail className="h-4 w-4 mr-1" />
-                        Email
-                      </Button>
+
+                    <p className="text-sm text-charcoal-600 mb-3 line-clamp-2">
+                      {vendor.description || 'Professional service provider for your special occasions.'}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <Badge className="bg-coral-100 text-coral-800">
+                        {vendor.price_range || 'Contact for pricing'}
+                      </Badge>
+                      <div className="flex gap-2">
+                        {vendor.contact_phone && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              initiateCall(vendor);
+                            }}
+                          >
+                            <Phone className="h-4 w-4" />
+                          </Button>
+                        )}
+                        {vendor.contact_email && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(`mailto:${vendor.contact_email}`, '_blank');
+                            }}
+                          >
+                            <Mail className="h-4 w-4" />
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                    <Button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-cormorant font-semibold shadow-lg hover:shadow-xl transition-shadow">
-                      View Details
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-          
-          {/* Load More */}
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" className="border-primary-400 text-primary-700 hover:bg-primary-100 hover:border-primary-500 font-cormorant px-8 py-3 shadow-lg">
-              Load More Vendors
-            </Button>
-          </div>
-        </div>
-      </section>
+        )}
 
-      <Footer />
+        {/* Login Dialog */}
+        <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Login Required</DialogTitle>
+            </DialogHeader>
+            <div className="text-center py-6">
+              <p className="text-charcoal-600 mb-4">
+                Please log in to view full vendor details and contact options.
+              </p>
+              <div className="flex gap-3 justify-center">
+                <Button 
+                  onClick={() => {
+                    setShowLoginDialog(false);
+                    window.location.href = '/customer-login';
+                  }}
+                  className="bg-coral-500 hover:bg-coral-600"
+                >
+                  Login as Customer
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={() => setShowLoginDialog(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* Vendor Detail Dialog */}
+        <Dialog open={!!selectedVendor} onOpenChange={() => setSelectedVendor(null)}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>{selectedVendor?.business_name}</DialogTitle>
+            </DialogHeader>
+            {selectedVendor && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-16 w-16">
+                    <AvatarImage src={selectedVendor.portfolio_images?.[0]} />
+                    <AvatarFallback>{selectedVendor.business_name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-lg font-bold">{selectedVendor.business_name}</h3>
+                    <p className="text-charcoal-600">{selectedVendor.category}</p>
+                    <div className="flex items-center gap-2">
+                      <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                      <span>{selectedVendor.rating || 0}</span>
+                      <MapPin className="h-4 w-4 text-charcoal-400 ml-2" />
+                      <span className="text-sm">{selectedVendor.location}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">About</h4>
+                  <p className="text-charcoal-600">{selectedVendor.description}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-2">Services & Pricing</h4>
+                  <Badge className="bg-coral-100 text-coral-800">
+                    {selectedVendor.price_range || 'Contact for pricing'}
+                  </Badge>
+                </div>
+
+                <div className="flex gap-3">
+                  <Button className="bg-coral-500 hover:bg-coral-600 flex-1">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Book Now
+                  </Button>
+                  <Button variant="outline" className="flex-1">
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    Chat
+                  </Button>
+                  {selectedVendor.contact_phone && (
+                    <Button 
+                      variant="outline"
+                      onClick={() => initiateCall(selectedVendor)}
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      {profile?.first_call_used ? 'Used' : 'Free Call'}
+                    </Button>
+                  )}
+                </div>
+
+                {profile?.first_call_used && (
+                  <div className="text-center py-2 px-4 bg-yellow-50 rounded-lg">
+                    <p className="text-sm text-yellow-800">
+                      You've used your free call. Chat or book to continue engaging with vendors.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   );
 };
