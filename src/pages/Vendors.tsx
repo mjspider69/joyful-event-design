@@ -1,16 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Search, MapPin, Star, Heart, Phone, Mail, Filter, Calendar, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { CulturalBackdrop } from "@/components/CulturalBackdrop";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { VendorFilters } from "@/components/VendorFilters";
+import { VendorCard } from "@/components/VendorCard";
+import { LoginDialog } from "@/components/LoginDialog";
+import { VendorDetailDialog } from "@/components/VendorDetailDialog";
 
 const Vendors: React.FC = () => {
   const [vendors, setVendors] = useState<any[]>([]);
@@ -23,14 +20,6 @@ const Vendors: React.FC = () => {
   const [selectedVendor, setSelectedVendor] = useState<any>(null);
   const { user, profile } = useAuth();
   const { toast } = useToast();
-
-  const categories = [
-    'all', 'Photographers', 'Decorators', 'Caterers', 'Musicians', 'Priests', 'Makeup Artists', 'Venues', 'Transport'
-  ];
-
-  const locations = [
-    'all', 'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Ahmedabad', 'Jaipur', 'Kochi'
-  ];
 
   useEffect(() => {
     fetchVendors();
@@ -181,52 +170,14 @@ const Vendors: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Filters */}
-        <Card className="mb-8 bg-white shadow-lg">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-3 h-4 w-4 text-charcoal-400" />
-                <Input
-                  placeholder="Search vendors..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
-                />
-              </div>
-              
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>
-                      {category === 'all' ? 'All Categories' : category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Location" />
-                </SelectTrigger>
-                <SelectContent>
-                  {locations.map(location => (
-                    <SelectItem key={location} value={location}>
-                      {location === 'all' ? 'All Locations' : location}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Button className="bg-coral-500 hover:bg-coral-600 w-full">
-                <Filter className="h-4 w-4 mr-2" />
-                Apply Filters
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <VendorFilters
+          searchQuery={searchQuery}
+          selectedCategory={selectedCategory}
+          selectedLocation={selectedLocation}
+          onSearchChange={setSearchQuery}
+          onCategoryChange={setSelectedCategory}
+          onLocationChange={setSelectedLocation}
+        />
 
         {/* Results Count */}
         <div className="mb-6">
@@ -247,199 +198,31 @@ const Vendors: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredVendors.map((vendor) => (
-              <Card 
-                key={vendor.id} 
-                className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer hover:-translate-y-1"
-                onClick={() => handleVendorClick(vendor)}
-              >
-                <CardContent className="p-0">
-                  {/* Vendor Image */}
-                  <div className="relative h-48 bg-gradient-to-r from-coral-100 to-sage-100">
-                    {vendor.portfolio_images && vendor.portfolio_images.length > 0 ? (
-                      <img 
-                        src={vendor.portfolio_images[0]} 
-                        alt={vendor.business_name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-4xl">📸</span>
-                      </div>
-                    )}
-                    <div className="absolute top-3 right-3">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="bg-white/90 hover:bg-white"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          saveVendor(vendor.id);
-                        }}
-                      >
-                        <Heart className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Vendor Info */}
-                  <div className="p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h3 className="font-bold text-lg text-charcoal-900">{vendor.business_name}</h3>
-                        <p className="text-sm text-charcoal-600">{vendor.category}</p>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                        <span className="text-sm font-medium">{vendor.rating || 0}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-1 mb-2">
-                      <MapPin className="h-4 w-4 text-charcoal-400" />
-                      <span className="text-sm text-charcoal-600">{vendor.location || 'Location not specified'}</span>
-                    </div>
-
-                    <p className="text-sm text-charcoal-600 mb-3 line-clamp-2">
-                      {vendor.description || 'Professional service provider for your special occasions.'}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <Badge className="bg-coral-100 text-coral-800">
-                        {vendor.price_range || 'Contact for pricing'}
-                      </Badge>
-                      <div className="flex gap-2">
-                        {vendor.contact_phone && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              initiateCall(vendor);
-                            }}
-                          >
-                            <Phone className="h-4 w-4" />
-                          </Button>
-                        )}
-                        {vendor.contact_email && (
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              window.open(`mailto:${vendor.contact_email}`, '_blank');
-                            }}
-                          >
-                            <Mail className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <VendorCard
+                key={vendor.id}
+                vendor={vendor}
+                onVendorClick={handleVendorClick}
+                onSaveVendor={saveVendor}
+                onInitiateCall={initiateCall}
+              />
             ))}
           </div>
         )}
 
         {/* Login Dialog */}
-        <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Login Required</DialogTitle>
-            </DialogHeader>
-            <div className="text-center py-6">
-              <p className="text-charcoal-600 mb-4">
-                Please log in to view full vendor details and contact options.
-              </p>
-              <div className="flex gap-3 justify-center">
-                <Button 
-                  onClick={() => {
-                    setShowLoginDialog(false);
-                    window.location.href = '/customer-login';
-                  }}
-                  className="bg-coral-500 hover:bg-coral-600"
-                >
-                  Login as Customer
-                </Button>
-                <Button 
-                  variant="outline"
-                  onClick={() => setShowLoginDialog(false)}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <LoginDialog 
+          open={showLoginDialog} 
+          onOpenChange={setShowLoginDialog} 
+        />
 
         {/* Vendor Detail Dialog */}
-        <Dialog open={!!selectedVendor} onOpenChange={() => setSelectedVendor(null)}>
-          <DialogContent className="max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>{selectedVendor?.business_name}</DialogTitle>
-            </DialogHeader>
-            {selectedVendor && (
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <Avatar className="h-16 w-16">
-                    <AvatarImage src={selectedVendor.portfolio_images?.[0]} />
-                    <AvatarFallback>{selectedVendor.business_name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h3 className="text-lg font-bold">{selectedVendor.business_name}</h3>
-                    <p className="text-charcoal-600">{selectedVendor.category}</p>
-                    <div className="flex items-center gap-2">
-                      <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                      <span>{selectedVendor.rating || 0}</span>
-                      <MapPin className="h-4 w-4 text-charcoal-400 ml-2" />
-                      <span className="text-sm">{selectedVendor.location}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">About</h4>
-                  <p className="text-charcoal-600">{selectedVendor.description}</p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">Services & Pricing</h4>
-                  <Badge className="bg-coral-100 text-coral-800">
-                    {selectedVendor.price_range || 'Contact for pricing'}
-                  </Badge>
-                </div>
-
-                <div className="flex gap-3">
-                  <Button className="bg-coral-500 hover:bg-coral-600 flex-1">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    Book Now
-                  </Button>
-                  <Button variant="outline" className="flex-1">
-                    <MessageCircle className="h-4 w-4 mr-2" />
-                    Chat
-                  </Button>
-                  {selectedVendor.contact_phone && (
-                    <Button 
-                      variant="outline"
-                      onClick={() => initiateCall(selectedVendor)}
-                    >
-                      <Phone className="h-4 w-4 mr-2" />
-                      {profile?.first_call_used ? 'Used' : 'Free Call'}
-                    </Button>
-                  )}
-                </div>
-
-                {profile?.first_call_used && (
-                  <div className="text-center py-2 px-4 bg-yellow-50 rounded-lg">
-                    <p className="text-sm text-yellow-800">
-                      You've used your free call. Chat or book to continue engaging with vendors.
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-          </DialogContent>
-        </Dialog>
+        <VendorDetailDialog
+          vendor={selectedVendor}
+          open={!!selectedVendor}
+          onOpenChange={() => setSelectedVendor(null)}
+          onInitiateCall={initiateCall}
+          profile={profile}
+        />
       </div>
     </div>
   );
