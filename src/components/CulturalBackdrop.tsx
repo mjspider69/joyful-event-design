@@ -5,9 +5,14 @@ import { supabase } from '@/integrations/supabase/client';
 interface CulturalBackdropProps {
   location: string;
   className?: string;
+  children?: React.ReactNode;
 }
 
-export const CulturalBackdrop: React.FC<CulturalBackdropProps> = ({ location, className = '' }) => {
+export const CulturalBackdrop: React.FC<CulturalBackdropProps> = ({ 
+  location, 
+  className = '', 
+  children 
+}) => {
   const [backdrop, setBackdrop] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +56,9 @@ export const CulturalBackdrop: React.FC<CulturalBackdropProps> = ({ location, cl
 
   if (loading) {
     return (
-      <div className={`bg-gradient-to-r from-coral-200 to-sage-200 animate-pulse ${className}`} />
+      <div className={`bg-gradient-to-r from-coral-200 to-sage-200 animate-pulse ${className}`}>
+        {children}
+      </div>
     );
   }
 
@@ -63,6 +70,7 @@ export const CulturalBackdrop: React.FC<CulturalBackdropProps> = ({ location, cl
       }}
     >
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      {children}
       {backdrop?.description && (
         <div className="absolute bottom-4 left-4 text-white text-sm opacity-75">
           {backdrop.description}
