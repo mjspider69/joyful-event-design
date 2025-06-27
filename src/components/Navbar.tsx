@@ -1,242 +1,186 @@
 
-import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Heart, Menu, X, User, Building, Shield, LogIn } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Menu, X, User, LogOut, Settings, Heart } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [user, setUser] = useState<any>(null);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut, profile } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    checkUser();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+  const handleSignOut = async () => {
+    await signOut();
     navigate('/');
   };
 
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/services', label: 'Services' },
-    { path: '/vendors', label: 'Vendors' },
-    { path: '/gallery', label: 'Gallery' },
-    { path: '/contact', label: 'Contact' },
+  const getDashboardLink = () => {
+    if (!profile?.user_type) return '/customer-dashboard';
+    
+    switch (profile.user_type) {
+      case 'admin':
+        return '/admin-dashboard';
+      case 'vendor':
+        return '/vendor-dashboard';
+      default:
+        return '/customer-dashboard';
+    }
+  };
+
+  const navLinks = [
+    { href: "/services", label: "Services" },
+    { href: "/vendors", label: "Vendors" },
+    { href: "/gallery", label: "Gallery" },
+    { href: "/contact", label: "Contact" },
   ];
 
-  const isActivePath = (path: string) => location.pathname === path;
-
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gold-200' 
-        : 'bg-transparent'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-cream-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <Heart className={`h-8 w-8 transition-colors duration-300 ${
-              isScrolled ? 'text-maroon-600 group-hover:text-maroon-700' : 'text-gold-400 group-hover:text-gold-300'
-            }`} />
-            <span className={`font-cinzel font-bold text-2xl transition-colors duration-300 ${
-              isScrolled ? 'text-maroon-900' : 'text-gold-100'
-            }`}>
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-amber-600 to-yellow-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">A</span>
+            </div>
+            <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-yellow-600">
               Aaroham
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navLinks.map((link) => (
               <Link
-                key={item.path}
-                to={item.path}
-                className={`relative font-cormorant font-medium text-lg transition-colors duration-300 group ${
-                  isActivePath(item.path)
-                    ? isScrolled 
-                      ? 'text-maroon-900' 
-                      : 'text-gold-100'
-                    : isScrolled 
-                      ? 'text-gray-700 hover:text-maroon-900' 
-                      : 'text-gold-200 hover:text-gold-100'
+                key={link.href}
+                to={link.href}
+                className={`text-charcoal-700 hover:text-amber-600 transition-colors font-medium ${
+                  location.pathname === link.href ? 'text-amber-600' : ''
                 }`}
               >
-                {item.label}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
-                  isActivePath(item.path) || isScrolled ? 'bg-gold-500' : 'bg-gold-300'
-                }`}></span>
+                {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Desktop Auth Buttons */}
+          {/* Auth Section */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
-              <div className="flex items-center gap-4">
-                <span className={`font-cormorant ${isScrolled ? 'text-maroon-900' : 'text-gold-200'}`}>
-                  Welcome back!
-                </span>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center space-x-2">
+                    <User className="h-4 w-4" />
+                    <span>{profile?.full_name || 'Account'}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem onClick={() => navigate(getDashboardLink())}>
+                    <Settings className="h-4 w-4 mr-2" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  {profile?.user_type === 'customer' && (
+                    <DropdownMenuItem onClick={() => navigate('/customer-dashboard')}>
+                      <Heart className="h-4 w-4 mr-2" />
+                      My Bookings
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex items-center space-x-3">
                 <Button
-                  onClick={handleLogout}
-                  variant="outline"
-                  className={`font-cormorant transition-all duration-300 ${
-                    isScrolled 
-                      ? 'border-maroon-600 text-maroon-600 hover:bg-maroon-600 hover:text-white' 
-                      : 'border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-maroon-900'
-                  }`}
+                  variant="ghost"
+                  onClick={() => navigate('/customer-login')}
+                  className="text-charcoal-700 hover:text-amber-600"
                 >
-                  Logout
+                  Login
+                </Button>
+                <Button
+                  onClick={() => navigate('/customer-login')}
+                  className="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white"
+                >
+                  Get Started
                 </Button>
               </div>
-            ) : (
-              <>
-                <div className="flex items-center gap-2">
-                  <Link to="/customer-login">
-                    <Button
-                      variant="ghost"
-                      className={`font-cormorant transition-all duration-300 ${
-                        isScrolled 
-                          ? 'text-gray-700 hover:text-maroon-900 hover:bg-gray-100' 
-                          : 'text-gold-200 hover:text-gold-100 hover:bg-white/10'
-                      }`}
-                    >
-                      <User className="h-4 w-4 mr-2" />
-                      Customer
-                    </Button>
-                  </Link>
-                  <Link to="/vendor-login">
-                    <Button
-                      variant="ghost"
-                      className={`font-cormorant transition-all duration-300 ${
-                        isScrolled 
-                          ? 'text-gray-700 hover:text-maroon-900 hover:bg-gray-100' 
-                          : 'text-gold-200 hover:text-gold-100 hover:bg-white/10'
-                      }`}
-                    >
-                      <Building className="h-4 w-4 mr-2" />
-                      Vendor
-                    </Button>
-                  </Link>
-                  <Link to="/admin-login">
-                    <Button
-                      variant="ghost"
-                      className={`font-cormorant transition-all duration-300 ${
-                        isScrolled 
-                          ? 'text-gray-700 hover:text-maroon-900 hover:bg-gray-100' 
-                          : 'text-gold-200 hover:text-gold-100 hover:bg-white/10'
-                      }`}
-                    >
-                      <Shield className="h-4 w-4 mr-2" />
-                      Admin
-                    </Button>
-                  </Link>
-                </div>
-                <Link to="/booking">
-                  <Button className={`font-cormorant font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    isScrolled 
-                      ? 'bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-maroon-900' 
-                      : 'bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-maroon-900'
-                  }`}>
-                    Plan My Event
-                  </Button>
-                </Link>
-              </>
             )}
           </div>
 
           {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
-              isScrolled 
-                ? 'text-maroon-900 hover:bg-gray-100' 
-                : 'text-gold-200 hover:bg-white/10'
-            }`}
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gold-200 shadow-lg">
-            <div className="px-4 py-6 space-y-4">
-              {navItems.map((item) => (
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-cream-200">
+            <div className="flex flex-col space-y-3">
+              {navLinks.map((link) => (
                 <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block font-cormorant font-medium text-lg transition-colors duration-300 ${
-                    isActivePath(item.path) 
-                      ? 'text-maroon-900' 
-                      : 'text-gray-700 hover:text-maroon-900'
-                  }`}
+                  key={link.href}
+                  to={link.href}
+                  className="text-charcoal-700 hover:text-amber-600 transition-colors px-3 py-2"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
+                  {link.label}
                 </Link>
               ))}
               
-              <div className="pt-4 border-t border-gold-200">
-                {user ? (
-                  <Button
-                    onClick={() => {
-                      handleLogout();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    variant="outline"
-                    className="w-full border-maroon-600 text-maroon-600 hover:bg-maroon-600 hover:text-white font-cormorant"
+              {user ? (
+                <>
+                  <Link
+                    to={getDashboardLink()}
+                    className="text-charcoal-700 hover:text-amber-600 transition-colors px-3 py-2"
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    Logout
-                  </Button>
-                ) : (
-                  <div className="space-y-3">
-                    <div className="grid grid-cols-3 gap-2">
-                      <Link to="/customer-login" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="outline" size="sm" className="w-full text-xs border-gray-300 text-gray-700 hover:bg-gray-100">
-                          <User className="h-3 w-3 mr-1" />
-                          Customer
-                        </Button>
-                      </Link>
-                      <Link to="/vendor-login" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="outline" size="sm" className="w-full text-xs border-gray-300 text-gray-700 hover:bg-gray-100">
-                          <Building className="h-3 w-3 mr-1" />
-                          Vendor
-                        </Button>
-                      </Link>
-                      <Link to="/admin-login" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="outline" size="sm" className="w-full text-xs border-gray-300 text-gray-700 hover:bg-gray-100">
-                          <Shield className="h-3 w-3 mr-1" />
-                          Admin
-                        </Button>
-                      </Link>
-                    </div>
-                    <Link to="/booking" onClick={() => setIsMobileMenuOpen(false)}>
-                      <Button className="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-maroon-900 font-cormorant font-semibold">
-                        Plan My Event
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-              </div>
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleSignOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-charcoal-700 hover:text-amber-600 transition-colors px-3 py-2 text-left"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/customer-login"
+                    className="text-charcoal-700 hover:text-amber-600 transition-colors px-3 py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/customer-login"
+                    className="bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-3 py-2 rounded-md text-center"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}
